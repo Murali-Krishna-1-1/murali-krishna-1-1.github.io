@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murali Krishna | Salesforce Developer</title>
-    <meta name="description" content="Murali Krishna — Salesforce Developer specializing in Apex, LWC, and Integrations.">
+    <title>Murali Krishna | Salesforce Architect</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="cursor-glow"></div>
+
     <header class="navbar">
         <div class="container nav-container">
-            <div class="logo">MK</div>
+            <div class="logo">M<span>K</span></div>
             <nav>
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
+                <a href="#about">Skills</a>
                 <a href="#projects">Projects</a>
-                <button id="theme-toggle" aria-label="Toggle Theme">
-                    <span class="sun">☀️</span>
-                    <span class="moon">🌙</span>
+                <a href="#edu">Path</a>
+                <button id="theme-toggle" class="glass-btn">
+                    <span class="mode-icon">🌓</span>
                 </button>
             </nav>
         </div>
@@ -26,133 +26,112 @@
 
     <main>
         <section class="hero reveal">
-            <div class="container hero-content">
+            <div class="container hero-grid">
                 <div class="hero-text">
-                    <h1>Hi, I'm <span class="highlight">Murali Krishna</span></h1>
-                    <p class="tagline">Software Engineer & Salesforce Developer</p>
-                    <p class="description">
-                        Specializing in building scalable Salesforce solutions, complex integrations, and marketing automation. 
-                        Currently driving donor engagement for <strong>SETI</strong>.
-                    </p>
-                    <div class="cta-group">
-                        <a href="mailto:muralikrishna17b@gmail.com" class="btn primary">Get In Touch</a>
-                        <a href="resume.pdf" class="btn secondary" download>Download CV</a>
+                    <div class="badge">Salesforce Developer</div>
+                    <h1>Engineering <span class="gradient-text">Cloud Solutions</span> with Precision.</h1>
+                    <p>I transform complex business requirements into high-performance Salesforce architectures. From processing <strong>6 million records</strong> to automating donor journeys for <strong>SETI</strong>.</p>
+                    <div class="hero-btns">
+                        <a href="mailto:muralikrishna17b@gmail.com" class="btn-neon">Hire Me</a>
+                        <a href="https://www.linkedin.com/in/iam-murali/" class="btn-outline">LinkedIn</a>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <img src="assets/photo.jpg" alt="Murali Krishna">
-                </div>
-            </div>
-        </section>
-
-        <section class="stats container reveal">
-            <div class="stat-card">
-                <h3>6M+</h3>
-                <p>Records Processed</p>
-            </div>
-            <div class="stat-card">
-                <h3>PD1</h3>
-                <p>Certified Developer</p>
-            </div>
-            <div class="stat-card">
-                <h3>3+</h3>
-                <p>Payment Gateways</p>
-            </div>
-        </section>
-
-        <section id="about" class="skills-section container reveal">
-            <h2 class="section-title">Technical Arsenal</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>Development</h4>
-                    <ul>
-                        <li>Apex (Triggers, Batch, Async)</li>
-                        <li>LWC & Aura Components</li>
-                        <li>SOQL / SOSL</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h4>Integration</h4>
-                    <ul>
-                        <li>REST / SOAP Web Services</li>
-                        <li>OAuth 2.0 & APIs</li>
-                        <li>PayPal / iDonate / Every.org</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h4>Admin & Marketing</h4>
-                    <ul>
-                        <li>Flows & Process Builder</li>
-                        <li>Pardot (Account Engagement)</li>
-                        <li>Salesforce NPSP</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="experience" class="experience container reveal">
-            <h2 class="section-title">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="time-header">
-                        <h3>Techtinium — Software Engineer</h3>
-                        <span>Jan 2025 - Present</span>
+                <div class="hero-visual">
+                    <div class="photo-frame">
+                        <img src="assets/photo.jpg" alt="Murali Krishna">
                     </div>
-                    <p>Managing Pardot campaigns for SETI and integrating Salesforce NPSP with payment platforms like PayPal and iDonate.</p>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-header">
-                        <h3>Lean AgileNautics — Salesforce Developer</h3>
-                        <span>July 2023 - Jan 2025</span>
-                    </div>
-                    <p>Engineered a logistics solution handling 5-6 million records using Batch Apex and custom REST APIs.</p>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="projects-section container reveal">
-            <h2 class="section-title">Selected Projects</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <h4>Donation Automation</h4>
-                    <p>Automated gift processing for NPSP, syncing real-time data from multiple payment gateways.</p>
-                    <div class="tags"><span>NPSP</span><span>API</span><span>Apex</span></div>
+        <section id="about" class="container reveal">
+            <h2 class="section-label">Technical Superpowers</h2>
+            <div class="skills-bento">
+                <div class="skill-card glass">
+                    <h3>Apex & LWC</h3>
+                    <p>Building the engine and the cockpit. Expert in Triggers, Batch Apex, and sleek Lightning components.</p>
+                    <div class="tags"><span>Async Apex</span><span>LDS</span><span>Shadow DOM</span></div>
                 </div>
-                <div class="project-card">
-                    <h4>Eventbrite Sync</h4>
-                    <p>Real-time synchronization of event attendees into Salesforce campaigns for streamlined reporting.</p>
-                    <div class="tags"><span>Integration</span><span>Pardot</span></div>
+                <div class="skill-card glass">
+                    <h3>Integrations</h3>
+                    <p>Connecting the dots. REST/SOAP specialist using OAuth 2.0 to sync Salesforce with the world.</p>
+                    <div class="tags"><span>PayPal</span><span>Postman</span><span>Webhooks</span></div>
+                </div>
+                <div class="skill-card glass">
+                    <h3>Marketing Tech</h3>
+                    <p>Driving growth through Pardot automation, lead scoring, and engagement programs.</p>
+                    <div class="tags"><span>Account Engagement</span><span>NPSP</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="edu" class="container reveal">
+            <div class="split-grid">
+                <div class="edu-column">
+                    <h2 class="section-label">Education</h2>
+                    <div class="timeline-card glass">
+                        <h4>MCA, Computer Applications</h4>
+                        <p class="school">Jain University, Bangalore</p>
+                        <span class="date">2024 — 2026</span>
+                    </div>
+                    <div class="timeline-card glass">
+                        <h4>B.Sc. Information Technology</h4>
+                        <p class="school">NGM College, Pollachi</p>
+                        <span class="date">2020 — 2023</span>
+                    </div>
+                </div>
+                <div class="certs-column">
+                    <h2 class="section-label">Certifications</h2>
+                    <div class="cert-item glass">
+                        <div class="cert-icon">☁️</div>
+                        <div>
+                            <h4>Platform Developer I</h4>
+                            <p>Salesforce Certified — May 2024</p>
+                        </div>
+                    </div>
+                    <div class="cert-item glass">
+                        <div class="cert-icon">⚡</div>
+                        <div>
+                            <h4>JavaScript (Basic)</h4>
+                            <p>HackerRank — Sep 2022</p>
+                        </div>
+                    </div>
+                    <div class="cert-item glass">
+                        <div class="cert-icon">🎓</div>
+                        <div>
+                            <h4>Salesforce Virtual Intern</h4>
+                            <p>SmartInternz — Sep 2022</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="container">
-        <p>© <span id="year"></span> Murali Krishna. Connect on <a href="https://www.linkedin.com/in/iam-murali/">LinkedIn</a>.</p>
+        <p>© <span id="year"></span> Murali Krishna — Built for the future.</p>
     </footer>
 
     <script>
-        // Theme Toggle Logic
-        const toggle = document.getElementById('theme-toggle');
-        const html = document.documentElement;
-        
-        toggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', newTheme);
+        // Smooth Cursor Glow
+        const glow = document.querySelector('.cursor-glow');
+        document.addEventListener('mousemove', (e) => {
+            glow.style.left = e.pageX + 'px';
+            glow.style.top = e.pageY + 'px';
         });
 
-        // Scroll Reveal Animation Logic
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
+        // Theme Toggle
+        const btn = document.getElementById('theme-toggle');
+        btn.onclick = () => {
+            const theme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
+        };
 
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => e.isIntersecting && e.target.classList.add('active'));
+        }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
