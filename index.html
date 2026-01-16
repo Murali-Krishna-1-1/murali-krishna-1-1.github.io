@@ -5,25 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Murali Krishna | Salesforce Developer Portfolio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="cursor-glow"></div>
 
     <header class="navbar">
         <div class="container nav-container">
-            <div class="logo">M<span>K</span></div>
+            <a href="#" class="logo">M<span>K</span></a>
             <nav class="nav-links">
                 <a href="#mission">Mission</a>
                 <a href="#skills">Skills</a>
                 <a href="#experience">Experience</a>
-                <a href="#certifications">Certifications</a>
+                <a href="#education">Education</a>
+                <a href="#certifications">Certs</a>
             </nav>
-            <div class="nav-socials">
-                <a href="https://github.com/Murali-Krishna-1-1" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/iam-murali/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <button id="theme-toggle" class="glass-btn">🌓</button>
+            <div class="nav-actions">
+                <a href="https://github.com/Murali-Krishna-1-1" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/iam-murali/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <button id="theme-toggle" class="mode-btn">🌓</button>
             </div>
         </div>
     </header>
@@ -34,10 +35,10 @@
                 <div class="hero-text">
                     <div class="badge">Salesforce & Integration Specialist</div>
                     <h1>The <span class="gradient-text">Mission</span></h1>
-                    <p>I build high-performance cloud architectures that bridge the gap between business needs and technical excellence. Currently engineering donor engagement systems for <strong>SETI</strong> and processing data at scale.</p>
+                    <p>Software Engineer with hands-on experience in Salesforce CRM. I build high-performance solutions using <strong>Apex, LWC, and REST APIs</strong>, currently driving engagement for <strong>SETI</strong> via Techtinium.</p>
                     <div class="hero-btns">
                         <a href="mailto:muralikrishna17b@gmail.com" class="btn-neon"><i class="fas fa-envelope"></i> Email Me</a>
-                        <a href="https://github.com/Murali-Krishna-1-1" class="btn-outline"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://github.com/Murali-Krishna-1-1" target="_blank" class="btn-outline"><i class="fab fa-github"></i> Projects</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -49,113 +50,114 @@
         </section>
 
         <section id="skills" class="container reveal">
-            <h2 class="section-label">Full Technical Stack</h2>
+            <span class="section-label">Technical Arsenal</span>
             <div class="skills-bento">
                 <div class="skill-card glass">
-                    <h3><i class="fas fa-cloud"></i> Salesforce Dev</h3>
-                    <p>Apex (Triggers, Batch, Async), LWC, Aura, Visualforce, SOQL, SOSL.</p>
+                    <i class="fas fa-cloud"></i>
+                    <h3>Salesforce Dev</h3>
+                    <p>Apex (Async, Triggers), LWC, Aura, SOQL/SOSL.</p>
                 </div>
                 <div class="skill-card glass">
-                    <h3><i class="fas fa-plug"></i> Integration</h3>
-                    <p>REST/SOAP, OAuth 2.0, Custom Apex REST APIs, Postman, Platform Events.</p>
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Integration</h3>
+                    <p>REST/SOAP, OAuth 2.0, Custom APIs, Platform Events.</p>
                 </div>
                 <div class="skill-card glass">
-                    <h3><i class="fas fa-user-shield"></i> Admin & NPSP</h3>
-                    <p>Flows, Security Models, Reports, NPSP Donation Automation.</p>
+                    <i class="fas fa-user-shield"></i>
+                    <h3>Admin & NPSP</h3>
+                    <p>Flows, Security, NPSP Donation Automation for PayPal/iDonate.</p>
                 </div>
                 <div class="skill-card glass">
-                    <h3><i class="fas fa-code"></i> Core Tech</h3>
-                    <p>Python, JavaScript, Java (OOP), HTML5, CSS3, Git/GitHub.</p>
+                    <i class="fas fa-code"></i>
+                    <h3>Core Tech</h3>
+                    <p>Python, JavaScript, Java, Git, HTML/CSS.</p>
                 </div>
             </div>
         </section>
 
         <section id="experience" class="container reveal">
-            <h2 class="section-label">Professional Journey</h2>
-            <div class="glass experience-container">
+            <span class="section-label">Experience</span>
+            <div class="glass experience-wrapper">
                 <div class="timeline-item">
-                    <h4>Software Engineer | Techtinium</h4>
-                    <span class="date">Jan 2025 — Present</span>
-                    <p>Managing Pardot for SETI, driving donor engagement and NPSP integrations for PayPal and iDonate.</p>
+                    <div class="time-header">
+                        <h4>Software Engineer | Techtinium</h4>
+                        <span class="date">Jan 2025 — Present</span>
+                    </div>
+                    <p>Leading Pardot automation for SETI and syncing donation data across payment platforms.</p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Salesforce Developer | Lean AgileNautics</h4>
-                    <span class="date">July 2023 — Jan 2025</span>
-                    <p>Engineered a logistics solution processing 5–6 million records via Batch Apex and REST API.</p>
+                    <div class="time-header">
+                        <h4>Salesforce Developer | Lean AgileNautics</h4>
+                        <span class="date">July 2023 — Jan 2025</span>
+                    </div>
+                    <p>Developed a massive logistics solution processing <strong>6 million records</strong> via Batch Apex.</p>
                 </div>
             </div>
         </section>
 
         <section id="education" class="container reveal">
-            <h2 class="section-label">Education</h2>
             <div class="split-grid">
-                <div class="timeline-card glass">
-                    <h4>Master of Computer Applications (MCA)</h4>
-                    <p class="school">Jain University, Bangalore</p>
-                    <span class="date">2024 — 2026</span>
+                <div>
+                    <span class="section-label">Education</span>
+                    <div class="timeline-card glass">
+                        <p class="date">2024 — 2026</p>
+                        <h4>MCA</h4>
+                        <p class="subtext">Jain University, Bangalore.</p>
+                    </div>
+                    <div class="timeline-card glass">
+                        <p class="date">2020 — 2023</p>
+                        <h4>B.Sc. Information Technology</h4>
+                        <p class="subtext">NGM College, Pollachi.</p>
+                    </div>
                 </div>
-                <div class="timeline-card glass">
-                    <h4>B.Sc. Information Technology</h4>
-                    <p class="school">NGM College, Pollachi</p>
-                    <span class="date">2020 — 2023</span>
-                </div>
-            </div>
-        </section>
 
-        <section id="certifications" class="container reveal">
-            <h2 class="section-label">Verified Certifications</h2>
-            <div class="certs-grid">
-                <div class="cert-item glass">
-                    <div class="cert-info">
-                        <h4>Platform Developer I</h4>
-                        <p>Salesforce | Issued May 2024</p>
-                        <a href="https://trailhead.salesforce.com/en/credentials/certification-detail-print/?searchString=gkhuBZZfZZ6Rb/za4xoKIQItA1tH/QARzdSQqjYOjyw1AwGQ9BwqSETs3jbJou2z" target="_blank" class="cert-btn">View Credential</a>
-                    </div>
-                </div>
-                <div class="cert-item glass">
-                    <div class="cert-info">
-                        <h4>JavaScript (Intermediate)</h4>
-                        <p>HackerRank | Issued Jun 2024</p>
-                        <a href="https://www.hackerrank.com/certificates/7c6a82805e22" target="_blank" class="cert-btn">View Credential</a>
-                    </div>
-                </div>
-                <div class="cert-item glass">
-                    <div class="cert-info">
-                        <h4>Python Programming</h4>
-                        <p>HCL GUVI | Issued Dec 2022</p>
-                        <a href="https://www.guvi.in/verify-certificate?id=1976uo3205Aq56dz1b" target="_blank" class="cert-btn">View Credential</a>
-                    </div>
-                </div>
-                <div class="cert-item glass">
-                    <div class="cert-info">
-                        <h4>Phishing Foundations</h4>
-                        <p>KnowBe4 | Issued Mar 2025</p>
-                        <a href="https://training.knowbe4.com/enrollments/994252847/certificate.pdf" target="_blank" class="cert-btn">View Credential</a>
+                <div id="certifications">
+                    <span class="section-label">Certifications</span>
+                    <div class="cert-list">
+                        <div class="cert-card glass">
+                            <h4>Platform Developer I</h4>
+                            <a href="https://trailhead.salesforce.com/en/credentials/certification-detail-print/?searchString=gkhuBZZfZZ6Rb/za4xoKIQItA1tH/QARzdSQqjYOjyw1AwGQ9BwqSETs3jbJou2z" target="_blank" class="v-btn">Verify</a>
+                        </div>
+                        <div class="cert-card glass">
+                            <h4>JavaScript (Intermediate)</h4>
+                            <a href="https://www.hackerrank.com/certificates/7c6a82805e22" target="_blank" class="v-btn">Verify</a>
+                        </div>
+                        <div class="cert-card glass">
+                            <h4>Python Programming</h4>
+                            <a href="https://www.guvi.in/verify-certificate?id=1976uo3205Aq56dz1b" target="_blank" class="v-btn">Verify</a>
+                        </div>
+                        <div class="cert-card glass">
+                            <h4>Phishing Foundations</h4>
+                            <a href="https://training.knowbe4.com/enrollments/994252847/certificate.pdf" target="_blank" class="v-btn">Verify</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="container">
-        <p>© <span id="year"></span> Murali Krishna. Connect on <a href="https://www.linkedin.com/in/iam-murali/">LinkedIn</a>.</p>
+    <footer class="container site-footer">
+        <p>© <span id="year"></span> Murali Krishna — Salesforce & Integration Expert.</p>
     </footer>
 
     <script>
+        // Cursor Light Effect
         const glow = document.querySelector('.cursor-glow');
         document.addEventListener('mousemove', (e) => {
-            glow.style.left = e.pageX + 'px';
-            glow.style.top = e.pageY + 'px';
+            glow.style.left = e.clientX + 'px';
+            glow.style.top = e.clientY + 'px';
         });
 
+        // Theme Toggle Logic
         const btn = document.getElementById('theme-toggle');
         btn.onclick = () => {
             const theme = document.documentElement.getAttribute('data-theme');
             document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
         };
 
+        // Scroll Reveal Animation
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => e.isIntersecting && e.target.classList.add('active'));
+            entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         document.getElementById('year').textContent = new Date().getFullYear();
