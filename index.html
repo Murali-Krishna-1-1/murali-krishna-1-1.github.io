@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murali Krishna | Salesforce Architect</title>
+    <title>Murali Krishna | Salesforce Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -13,27 +14,30 @@
     <header class="navbar">
         <div class="container nav-container">
             <div class="logo">M<span>K</span></div>
-            <nav>
-                <a href="#about">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#edu">Path</a>
-                <button id="theme-toggle" class="glass-btn">
-                    <span class="mode-icon">🌓</span>
-                </button>
+            <nav class="nav-links">
+                <a href="#mission">Mission</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#certifications">Certifications</a>
             </nav>
+            <div class="nav-socials">
+                <a href="https://github.com/Murali-Krishna-1-1" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/iam-murali/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <button id="theme-toggle" class="glass-btn">🌓</button>
+            </div>
         </div>
     </header>
 
     <main>
-        <section class="hero reveal">
+        <section id="mission" class="hero reveal">
             <div class="container hero-grid">
                 <div class="hero-text">
-                    <div class="badge">Salesforce Developer</div>
-                    <h1>Engineering <span class="gradient-text">Cloud Solutions</span> with Precision.</h1>
-                    <p>I transform complex business requirements into high-performance Salesforce architectures. From processing <strong>6 million records</strong> to automating donor journeys for <strong>SETI</strong>.</p>
+                    <div class="badge">Salesforce & Integration Specialist</div>
+                    <h1>The <span class="gradient-text">Mission</span></h1>
+                    <p>I build high-performance cloud architectures that bridge the gap between business needs and technical excellence. Currently engineering donor engagement systems for <strong>SETI</strong> and processing data at scale.</p>
                     <div class="hero-btns">
-                        <a href="mailto:muralikrishna17b@gmail.com" class="btn-neon">Hire Me</a>
-                        <a href="https://www.linkedin.com/in/iam-murali/" class="btn-outline">LinkedIn</a>
+                        <a href="mailto:muralikrishna17b@gmail.com" class="btn-neon"><i class="fas fa-envelope"></i> Email Me</a>
+                        <a href="https://github.com/Murali-Krishna-1-1" class="btn-outline"><i class="fab fa-github"></i> GitHub</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -44,64 +48,89 @@
             </div>
         </section>
 
-        <section id="about" class="container reveal">
-            <h2 class="section-label">Technical Superpowers</h2>
+        <section id="skills" class="container reveal">
+            <h2 class="section-label">Full Technical Stack</h2>
             <div class="skills-bento">
                 <div class="skill-card glass">
-                    <h3>Apex & LWC</h3>
-                    <p>Building the engine and the cockpit. Expert in Triggers, Batch Apex, and sleek Lightning components.</p>
-                    <div class="tags"><span>Async Apex</span><span>LDS</span><span>Shadow DOM</span></div>
+                    <h3><i class="fas fa-cloud"></i> Salesforce Dev</h3>
+                    <p>Apex (Triggers, Batch, Async), LWC, Aura, Visualforce, SOQL, SOSL.</p>
                 </div>
                 <div class="skill-card glass">
-                    <h3>Integrations</h3>
-                    <p>Connecting the dots. REST/SOAP specialist using OAuth 2.0 to sync Salesforce with the world.</p>
-                    <div class="tags"><span>PayPal</span><span>Postman</span><span>Webhooks</span></div>
+                    <h3><i class="fas fa-plug"></i> Integration</h3>
+                    <p>REST/SOAP, OAuth 2.0, Custom Apex REST APIs, Postman, Platform Events.</p>
                 </div>
                 <div class="skill-card glass">
-                    <h3>Marketing Tech</h3>
-                    <p>Driving growth through Pardot automation, lead scoring, and engagement programs.</p>
-                    <div class="tags"><span>Account Engagement</span><span>NPSP</span></div>
+                    <h3><i class="fas fa-user-shield"></i> Admin & NPSP</h3>
+                    <p>Flows, Security Models, Reports, NPSP Donation Automation.</p>
+                </div>
+                <div class="skill-card glass">
+                    <h3><i class="fas fa-code"></i> Core Tech</h3>
+                    <p>Python, JavaScript, Java (OOP), HTML5, CSS3, Git/GitHub.</p>
                 </div>
             </div>
         </section>
 
-        <section id="edu" class="container reveal">
+        <section id="experience" class="container reveal">
+            <h2 class="section-label">Professional Journey</h2>
+            <div class="glass experience-container">
+                <div class="timeline-item">
+                    <h4>Software Engineer | Techtinium</h4>
+                    <span class="date">Jan 2025 — Present</span>
+                    <p>Managing Pardot for SETI, driving donor engagement and NPSP integrations for PayPal and iDonate.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Salesforce Developer | Lean AgileNautics</h4>
+                    <span class="date">July 2023 — Jan 2025</span>
+                    <p>Engineered a logistics solution processing 5–6 million records via Batch Apex and REST API.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="container reveal">
+            <h2 class="section-label">Education</h2>
             <div class="split-grid">
-                <div class="edu-column">
-                    <h2 class="section-label">Education</h2>
-                    <div class="timeline-card glass">
-                        <h4>MCA, Computer Applications</h4>
-                        <p class="school">Jain University, Bangalore</p>
-                        <span class="date">2024 — 2026</span>
-                    </div>
-                    <div class="timeline-card glass">
-                        <h4>B.Sc. Information Technology</h4>
-                        <p class="school">NGM College, Pollachi</p>
-                        <span class="date">2020 — 2023</span>
+                <div class="timeline-card glass">
+                    <h4>Master of Computer Applications (MCA)</h4>
+                    <p class="school">Jain University, Bangalore</p>
+                    <span class="date">2024 — 2026</span>
+                </div>
+                <div class="timeline-card glass">
+                    <h4>B.Sc. Information Technology</h4>
+                    <p class="school">NGM College, Pollachi</p>
+                    <span class="date">2020 — 2023</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="container reveal">
+            <h2 class="section-label">Verified Certifications</h2>
+            <div class="certs-grid">
+                <div class="cert-item glass">
+                    <div class="cert-info">
+                        <h4>Platform Developer I</h4>
+                        <p>Salesforce | Issued May 2024</p>
+                        <a href="https://trailhead.salesforce.com/en/credentials/certification-detail-print/?searchString=gkhuBZZfZZ6Rb/za4xoKIQItA1tH/QARzdSQqjYOjyw1AwGQ9BwqSETs3jbJou2z" target="_blank" class="cert-btn">View Credential</a>
                     </div>
                 </div>
-                <div class="certs-column">
-                    <h2 class="section-label">Certifications</h2>
-                    <div class="cert-item glass">
-                        <div class="cert-icon">☁️</div>
-                        <div>
-                            <h4>Platform Developer I</h4>
-                            <p>Salesforce Certified — May 2024</p>
-                        </div>
+                <div class="cert-item glass">
+                    <div class="cert-info">
+                        <h4>JavaScript (Intermediate)</h4>
+                        <p>HackerRank | Issued Jun 2024</p>
+                        <a href="https://www.hackerrank.com/certificates/7c6a82805e22" target="_blank" class="cert-btn">View Credential</a>
                     </div>
-                    <div class="cert-item glass">
-                        <div class="cert-icon">⚡</div>
-                        <div>
-                            <h4>JavaScript (Basic)</h4>
-                            <p>HackerRank — Sep 2022</p>
-                        </div>
+                </div>
+                <div class="cert-item glass">
+                    <div class="cert-info">
+                        <h4>Python Programming</h4>
+                        <p>HCL GUVI | Issued Dec 2022</p>
+                        <a href="https://www.guvi.in/verify-certificate?id=1976uo3205Aq56dz1b" target="_blank" class="cert-btn">View Credential</a>
                     </div>
-                    <div class="cert-item glass">
-                        <div class="cert-icon">🎓</div>
-                        <div>
-                            <h4>Salesforce Virtual Intern</h4>
-                            <p>SmartInternz — Sep 2022</p>
-                        </div>
+                </div>
+                <div class="cert-item glass">
+                    <div class="cert-info">
+                        <h4>Phishing Foundations</h4>
+                        <p>KnowBe4 | Issued Mar 2025</p>
+                        <a href="https://training.knowbe4.com/enrollments/994252847/certificate.pdf" target="_blank" class="cert-btn">View Credential</a>
                     </div>
                 </div>
             </div>
@@ -109,25 +138,22 @@
     </main>
 
     <footer class="container">
-        <p>© <span id="year"></span> Murali Krishna — Built for the future.</p>
+        <p>© <span id="year"></span> Murali Krishna. Connect on <a href="https://www.linkedin.com/in/iam-murali/">LinkedIn</a>.</p>
     </footer>
 
     <script>
-        // Smooth Cursor Glow
         const glow = document.querySelector('.cursor-glow');
         document.addEventListener('mousemove', (e) => {
             glow.style.left = e.pageX + 'px';
             glow.style.top = e.pageY + 'px';
         });
 
-        // Theme Toggle
         const btn = document.getElementById('theme-toggle');
         btn.onclick = () => {
             const theme = document.documentElement.getAttribute('data-theme');
             document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
         };
 
-        // Scroll Reveal
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => e.isIntersecting && e.target.classList.add('active'));
         }, { threshold: 0.1 });
