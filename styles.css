@@ -69,7 +69,12 @@ body.loaded {
     animation: fadeIn 0.5s ease-in;
 }
 
-.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+.container { 
+    max-width: 1100px; 
+    margin: 0 auto; 
+    padding: 0 2rem; 
+    width: 100%;
+}
 
 /* Cursor Glow Background */
 .cursor-glow {
@@ -319,6 +324,12 @@ h1 {
     font-weight: 700;
     position: relative;
     padding-left: 1rem;
+    margin-top: 0;
+}
+
+h2.section-label {
+    font-size: 0.8rem;
+    line-height: 1.2;
 }
 
 .section-label::before {
@@ -1286,6 +1297,23 @@ section:not(:first-child)::before {
     color: var(--text-dim);
 }
 
+.footer-meta {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.footer-link {
+    color: var(--accent);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+    color: var(--accent-secondary);
+    text-decoration: underline;
+}
+
 /* Scroll to Top Button */
 .scroll-top-btn {
     position: fixed;
@@ -1338,38 +1366,58 @@ section:not(:first-child)::before {
     background: var(--glass-hover);
 }
 
-@media (max-width: 900px) {
+/* Mobile First - Base Styles for Small Screens (320px - 600px) */
+@media (max-width: 600px) {
+    .container {
+        padding: 0 1rem;
+    }
+    
+    h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    
+    .hero {
+        padding: 100px 0 40px;
+    }
+    
     .hero-grid {
-        grid-template-columns: 1fr; 
-        text-align: center; 
-        gap: 3rem;
-    }
-    
-    .cert-list {
         grid-template-columns: 1fr;
-        max-width: 100%;
+        gap: 2rem;
+        text-align: center;
     }
     
-    .hero { 
-        padding: 140px 0 60px; 
-    }
-    
-    .hero-btns { 
-        justify-content: center; 
+    .hero-btns {
         flex-direction: column;
+        gap: 1rem;
     }
     
     .btn-neon, .btn-outline {
         width: 100%;
         justify-content: center;
+        padding: 14px 24px;
+        font-size: 0.9rem;
     }
     
-    h1 { 
-        font-size: 2.8rem; 
+    .section-label {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+        padding-left: 0.75rem;
+        margin-bottom: 1.5rem;
     }
     
-    .nav-links { 
-        display: none; 
+    .section-label::before {
+        width: 3px;
+        height: 16px;
+    }
+    
+    .glass {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+    
+    .nav-links {
+        display: none;
     }
     
     .mobile-menu-btn {
@@ -1382,31 +1430,38 @@ section:not(:first-child)::before {
     .cert-list,
     .education-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
     
     .roadmap-container {
-        padding-left: 1rem;
+        padding-left: 0.5rem;
     }
     
     .roadmap-line {
-        left: 15px;
+        left: 10px;
+        width: 2px;
     }
     
     .roadmap-item {
-        padding-left: 60px;
+        padding-left: 50px;
     }
     
     .roadmap-dot {
-        left: 3px;
+        left: 2px;
+        width: 18px;
+        height: 18px;
     }
     
     .cert-card {
         flex-direction: column;
         text-align: center;
+        padding: 1.5rem !important;
     }
     
     .cert-logo {
         margin: 0 auto;
+        width: 60px;
+        height: 60px;
     }
     
     .cert-content {
@@ -1417,30 +1472,310 @@ section:not(:first-child)::before {
         align-self: center;
     }
     
-    .container {
-        padding: 0 1.5rem;
+    .photo-frame {
+        max-width: 280px;
+        margin: 0 auto;
     }
     
     .photo-frame:hover {
         transform: scale(1.02);
     }
+    
+    .scroll-top-btn {
+        width: 45px;
+        height: 45px;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        font-size: 1rem;
+    }
+    
+    section {
+        margin-bottom: 4rem;
+        padding-top: 2rem;
+    }
+    
+    .navbar {
+        height: 70px;
+    }
+    
+    .nav-container {
+        height: 70px;
+    }
 }
 
-@media (max-width: 600px) {
+/* Tablet Styles (601px - 900px) */
+@media (min-width: 601px) and (max-width: 900px) {
+    .container {
+        padding: 0 1.5rem;
+    }
+    
     h1 {
-        font-size: 2.2rem;
+        font-size: 3rem;
     }
     
     .hero {
-        padding: 120px 0 40px;
+        padding: 130px 0 80px;
+    }
+    
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+    
+    .hero-btns {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .btn-neon, .btn-outline {
+        min-width: 200px;
+    }
+    
+    .skills-bento,
+    .why-hire-grid,
+    .projects-grid,
+    .cert-list,
+    .education-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .nav-links {
+        gap: 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .roadmap-container {
+        padding-left: 1rem;
+    }
+    
+    .roadmap-line {
+        left: 20px;
+    }
+    
+    .roadmap-item {
+        padding-left: 70px;
+    }
+    
+    .roadmap-dot {
+        left: 8px;
+    }
+    
+    .cert-card {
+        flex-direction: row;
+        padding: 2rem !important;
+    }
+}
+
+/* Desktop Styles (901px - 1920px) */
+@media (min-width: 901px) and (max-width: 1920px) {
+    .container {
+        max-width: 1200px;
+        padding: 0 2rem;
+    }
+    
+    .hero-grid {
+        gap: 60px;
+    }
+    
+    .skills-bento {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1000px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1200px;
+    }
+    
+    .cert-list {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1000px;
+    }
+    
+    .education-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1000px;
+    }
+}
+
+/* Large Desktop Styles (1921px - 2560px) */
+@media (min-width: 1921px) and (max-width: 2560px) {
+    .container {
+        max-width: 1400px;
+        padding: 0 3rem;
+    }
+    
+    h1 {
+        font-size: 5rem;
+    }
+    
+    .hero {
+        padding: 150px 0 120px;
+    }
+    
+    .hero-grid {
+        gap: 80px;
     }
     
     .section-label {
-        font-size: 0.7rem;
-        letter-spacing: 3px;
+        font-size: 0.9rem;
+        letter-spacing: 5px;
     }
     
     .glass {
-        padding: 1.5rem;
+        padding: 2.5rem;
+    }
+    
+    .skills-bento {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+        max-width: 1400px;
+    }
+    
+    .cert-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+    }
+    
+    .education-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 1200px;
+    }
+    
+    .why-hire-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* 4K and Ultra-Wide Displays (2561px+) */
+@media (min-width: 2561px) {
+    .container {
+        max-width: 1600px;
+        padding: 0 4rem;
+    }
+    
+    h1 {
+        font-size: 6rem;
+    }
+    
+    .hero {
+        padding: 180px 0 140px;
+    }
+    
+    .hero-grid {
+        gap: 100px;
+    }
+    
+    .section-label {
+        font-size: 1rem;
+        letter-spacing: 6px;
+        margin-bottom: 3rem;
+    }
+    
+    .glass {
+        padding: 3rem;
+        border-radius: 32px;
+    }
+    
+    .skills-bento {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+        max-width: 1400px;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        max-width: 1600px;
+    }
+    
+    .cert-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+        max-width: 1400px;
+    }
+    
+    .education-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2.5rem;
+        max-width: 1400px;
+    }
+    
+    .why-hire-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2.5rem;
+        max-width: 1600px;
+    }
+    
+    .roadmap-container {
+        max-width: 1200px;
+    }
+    
+    section {
+        margin-bottom: 8rem;
+    }
+    
+    .navbar {
+        height: 90px;
+    }
+    
+    .nav-container {
+        height: 90px;
+    }
+    
+    .logo {
+        font-size: 1.8rem;
+    }
+    
+    .nav-links {
+        gap: 2.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Landscape Orientation for Tablets */
+@media (min-width: 601px) and (max-width: 900px) and (orientation: landscape) {
+    .hero {
+        padding: 100px 0 60px;
+    }
+    
+    .hero-grid {
+        grid-template-columns: 1.2fr 0.8fr;
+        text-align: left;
+    }
+    
+    .hero-btns {
+        justify-content: flex-start;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar,
+    .scroll-top-btn,
+    .hero-btns,
+    .v-btn {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .glass {
+        border: 1px solid #ccc;
+        box-shadow: none;
     }
 }
