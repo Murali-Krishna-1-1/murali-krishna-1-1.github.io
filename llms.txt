@@ -1,0 +1,55 @@
+# Murali Krishna — Salesforce Developer & Software Engineer
+
+> High-performance Salesforce Architect specializing in Apex, LWC, and complex REST integrations.
+
+## Overview
+Enthusiastic Software Engineer with hands-on experience in Salesforce CRM (Sales, Service, and Nonprofit Clouds). Expert in building scalable cloud architectures, automating business processes, and integrating third-party platforms with real-world systems.
+
+## Technical Arsenal
+
+### Salesforce Development
+- **Apex**: Triggers, Handlers, Controllers, Wrapper Classes, and Test Classes.
+- **Asynchronous Apex**: Future methods, Queueable, and Batch Apex for high-volume data.
+- **Frontend**: Lightning Web Components (LWC), Aura Components, and Visualforce.
+- **Data**: SOQL, SOSL, and Governor Limit optimization.
+
+### Integrations
+- **Web Services**: REST/SOAP APIs and Custom Apex REST APIs.
+- **Auth**: OAuth 2.0 Authorization and Platform Events.
+- **Tools**: Postman for API testing and integration debugging.
+- **Platforms**: PayPal, iDonate, Every.org, and Eventbrite.
+
+### Salesforce Admin
+- Data Modeling, Security Model (Profiles, Roles, Permission Sets), and Business Process Automation (Flows, Process Builder).
+
+### Core Technologies
+- JavaScript, Python, Java (OOP), HTML5, CSS3, and Git/GitHub.
+
+## Professional Experience
+
+### Software Engineer | Techtinium
+*Jan 2025 — Present*
+- Solely managing Pardot email marketing campaigns for SETI to drive donor engagement.
+- Integrating Salesforce NPSP with payment platforms like PayPal and iDonate for seamless synchronization.
+- Overseeing Eventbrite integrations to streamline event registration data flow.
+
+### Salesforce Developer | Lean AgileNautics
+*July 2023 — Jan 2025*
+- Engineered a logistics solution processing 5–6 million records using Batch Apex and REST API integrations.
+- Developed healthcare solutions for patient record management using Aura Components.
+
+## Education
+- **Master of Computer Applications (MCA)**: Jain University, Bangalore (2024–2026).
+- **B.Sc. Information Technology**: NGM College, Pollachi (2020–2023).
+
+## Verified Certifications
+- **Salesforce Certified Platform Developer I**: Credential ID 4551043.
+- **JavaScript (Intermediate)**: HackerRank Certified.
+- **Python Programming**: GUVI Certified.
+- **Phishing Foundations**: KnowBe4 Certified.
+
+## Contact & Socials
+- **Email**: muralikrishna17b@gmail.com.
+- **LinkedIn**: [linkedin.com/in/iam-murali](https://www.linkedin.com/in/iam-murali/).
+- **GitHub**: [github.com/Murali-Krishna-1-1](https://github.com/Murali-Krishna-1-1).
+- **Portfolio**: [murali-krishna-1-1.github.io](https://murali-krishna-1-1.github.io/).
