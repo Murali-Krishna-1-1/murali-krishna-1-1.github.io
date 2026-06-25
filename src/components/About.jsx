@@ -1,4 +1,4 @@
-import { ArrowUpRight, BadgeCheck, Boxes, Cable, Users } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import Reveal from './Reveal';
 import Counter from './Counter';
 import SectionLabel from './SectionLabel';
@@ -12,37 +12,106 @@ export default function About() {
           <SectionLabel
             eyebrow="01 / About"
             title="Engineering with context."
-            description="I care about the system behind the screen: the people using it, the data moving through it, and what happens after launch."
+            description="I bridge the gap between complex CRM backends and fluid frontend interfaces, ensuring data flows reliably and users work efficiently."
           />
         </Reveal>
 
         <div className="about-layout">
-          <Reveal className="about-story">
-            <p className="about-lead">
-              I&apos;m a Salesforce developer who turns tangled operational problems into
-              <strong> calm, dependable products.</strong>
-            </p>
-            <p>
-              My work spans CRM architecture, custom interfaces, APIs, IoT data, donor operations,
-              and Experience Cloud. I have shipped systems used in live logistics and nonprofit
-              environments where reliability is part of the user experience.
-            </p>
-            <p>
-              I bring a full-stack mindset to Salesforce: understand the workflow, model the data,
-              build the interface, test the edges, and own the outcome.
-            </p>
-            <a className="text-link" href="#experience">See how I work <ArrowUpRight size={16} /></a>
-          </Reveal>
+          <div className="about-story">
+            <Reveal delay={0.04}>
+              <p className="about-lead">
+                I am a Salesforce developer who turns complex operational bottlenecks into
+                <strong> high-performance, predictable products.</strong>
+              </p>
+            </Reveal>
+            
+            <Reveal delay={0.1}>
+              <p>
+                My passion lies in the Salesforce ecosystem because of its power to drive real-world impact. In my work with the 
+                SETI Institute and other enterprise platforms, I have built integrations, batch utilities, and Lightning Web Components 
+                that manage millions of dollars in donations and track critical shipping logistics.
+              </p>
+            </Reveal>
 
-          <Reveal className="principles-grid" delay={0.08}>
-            <div><BadgeCheck /><strong>Production minded</strong><span>Built for maintainability, security, and measurable value.</span></div>
-            <div><Users /><strong>User centered</strong><span>Complex workflows made clear for the people doing the work.</span></div>
-            <div><Cable /><strong>Integration fluent</strong><span>External systems connected through resilient API patterns.</span></div>
-            <div><Boxes /><strong>Platform aware</strong><span>Declarative and coded solutions chosen with intent.</span></div>
-          </Reveal>
+            <Reveal delay={0.16}>
+              <p>
+                I bring a full-stack engineering mindset to CRM development: I believe that code quality, 
+                asynchronous design, event-driven integrations, and interface responsiveness are all part of the same user experience. 
+                I write Apex that respects governor limits, design databases that query efficiently, and build user interfaces that feel alive.
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.22}>
+              <a className="text-link" href="#experience">
+                See my professional history <ArrowUpRight size={16} />
+              </a>
+            </Reveal>
+          </div>
+
+          <div className="principles-grid">
+            <Reveal delay={0.06} direction="right">
+              <div>
+                <div className="mb-4 flex h-[36px] items-center">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/oqdmxhku.json"
+                    trigger="hover"
+                    colors="primary:var(--blue),secondary:var(--violet)"
+                    style={{ width: '36px', height: '36px' }}
+                  />
+                </div>
+                <strong>Production Minded</strong>
+                <span>Systems engineered for strict maintainability, security, and test coverage.</span>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.12} direction="right">
+              <div>
+                <div className="mb-4 flex h-[36px] items-center">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/kdduutho.json"
+                    trigger="hover"
+                    colors="primary:var(--blue),secondary:var(--violet)"
+                    style={{ width: '36px', height: '36px' }}
+                  />
+                </div>
+                <strong>User Centered</strong>
+                <span>Simplifying complex enterprise workflows into intuitive user experiences.</span>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.18} direction="right">
+              <div>
+                <div className="mb-4 flex h-[36px] items-center">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/vzxhnpqy.json"
+                    trigger="hover"
+                    colors="primary:var(--blue),secondary:var(--violet)"
+                    style={{ width: '36px', height: '36px' }}
+                  />
+                </div>
+                <strong>Integration Fluent</strong>
+                <span>Connecting Salesforce to external platforms via resilient REST and event pipelines.</span>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.24} direction="right">
+              <div>
+                <div className="mb-4 flex h-[36px] items-center">
+                  <lord-icon
+                    src="https://cdn.lordicon.com/qhgubeir.json"
+                    trigger="hover"
+                    colors="primary:var(--blue),secondary:var(--violet)"
+                    style={{ width: '36px', height: '36px' }}
+                  />
+                </div>
+                <strong>Platform Aware</strong>
+                <span>Selecting code or declarative tools with intentional architectural foresight.</span>
+              </div>
+            </Reveal>
+          </div>
         </div>
 
-        <Reveal className="metrics-grid" delay={0.12}>
+        <Reveal className="metrics-grid" delay={0.16}>
           {metrics.map((metric) => (
             <div key={metric.label} className="metric">
               <strong><Counter value={metric.num} /></strong>

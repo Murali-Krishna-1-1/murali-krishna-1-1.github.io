@@ -8,38 +8,79 @@ import profilePhoto from '../../assets/photo.jpg';
 
 const Lottie = typeof LottieComponent === 'function' ? LottieComponent : (LottieComponent.default || LottieComponent);
 
-const reveal = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (delay = 0) => ({
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.72, delay, ease: [0.16, 1, 0.3, 1] },
-  }),
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  },
 };
 
 export default function Hero() {
   const [role, setRole] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [lottieData, setLottieData] = useState(null);
   const reducedMotion = useReducedMotion();
+
+  // Fetch premium developer Lottie animation from CDN; fallback to local animation on error/slow network
+  useEffect(() => {
+    fetch('https://lottie.host/8e2f89f7-bf82-4c28-98cd-bb8bdf5ad915/1vUeXWvIeS.json')
+      .then((res) => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .then((data) => setLottieData(data))
+      .catch((err) => {
+        console.warn('Failed to fetch premium Lottie animation, falling back to local loader:', err);
+        setLottieData(loaderAnimation);
+      });
+  }, []);
 
   useEffect(() => {
     if (reducedMotion) return undefined;
-    const timer = window.setInterval(() => setRole((value) => (value + 1) % heroRoles.length), 2800);
+    const timer = window.setInterval(() => setRole((value) => (value + 1) % heroRoles.length), 3000);
     return () => window.clearInterval(timer);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      const x = (clientX - window.innerWidth / 2) / 30;
+      const y = (clientY - window.innerHeight / 2) / 30;
+      setMousePos({ x, y });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [reducedMotion]);
 
   return (
     <section id="hero" className="hero-section">
-      <div className="hero-copy">
-        <motion.div custom={0.1} variants={reveal} initial="hidden" animate="visible" className="availability">
-          <span><i /> Available for select opportunities</span>
-          <span>Chennai, India</span>
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="hero-copy"
+      >
+        <motion.div variants={itemVariants} className="availability">
+          <i /> Available for select roles &amp; projects
         </motion.div>
 
-        <motion.p custom={0.18} variants={reveal} initial="hidden" animate="visible" className="hero-kicker">
-          Salesforce Developer + Full Stack Engineer
+        <motion.p variants={itemVariants} className="hero-kicker">
+          Salesforce Platform &amp; Full Stack Architecture
         </motion.p>
 
-        <motion.h1 custom={0.26} variants={reveal} initial="hidden" animate="visible">
+        <motion.h1 variants={itemVariants}>
           I build systems
           <br />
           that make <span>complex work</span>
@@ -47,26 +88,26 @@ export default function Hero() {
           feel simple.
         </motion.h1>
 
-        <motion.div custom={0.36} variants={reveal} initial="hidden" animate="visible" className="role-line">
-          <span>Focused on</span>
+        <motion.div variants={itemVariants} className="role-line">
+          <span>Specializing in</span>
           <span className="role-window">
             <motion.strong
               key={heroRoles[role]}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.4 }}
             >
               {heroRoles[role]}.
             </motion.strong>
           </span>
         </motion.div>
 
-        <motion.p custom={0.44} variants={reveal} initial="hidden" animate="visible" className="hero-summary">
-          I design and ship production Salesforce products across IoT, nonprofit operations,
-          secure portals, and external integrations.
+        <motion.p variants={itemVariants} className="hero-summary">
+          Experienced Software Engineer delivering enterprise Salesforce integrations, custom web experiences, and robust automated data pipelines in NPSP.
         </motion.p>
 
-        <motion.div custom={0.52} variants={reveal} initial="hidden" animate="visible" className="hero-actions">
+        <motion.div variants={itemVariants} className="hero-actions">
           <a className="button button-primary" href="#projects">
             Explore my work <ArrowDown size={16} />
           </a>
@@ -75,17 +116,17 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        <motion.div custom={0.62} variants={reveal} initial="hidden" animate="visible" className="hero-proof">
-          <div><CheckCircle2 size={16} /><span><strong>PD1 certified</strong>Salesforce developer</span></div>
-          <div><CheckCircle2 size={16} /><span><strong>3+ years</strong>Production experience</span></div>
-          <div><CheckCircle2 size={16} /><span><strong>85%+</strong>Apex test coverage</span></div>
+        <motion.div variants={itemVariants} className="hero-proof">
+          <div><CheckCircle2 size={16} /><span><strong>PD1 Certified</strong></span></div>
+          <div><CheckCircle2 size={16} /><span><strong>3+ Years</strong> Production Experience</span></div>
+          <div><CheckCircle2 size={16} /><span><strong>88%+</strong> Apex Test Coverage</span></div>
         </motion.div>
-      </div>
+      </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, scale: 0.96, x: 28 }}
-        animate={{ opacity: 1, scale: 1, x: 0 }}
-        transition={{ duration: 0.9, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className="hero-visual"
       >
         <div className="profile-frame">
@@ -104,7 +145,12 @@ export default function Hero() {
         </div>
 
         <div className="code-panel">
-          <div className="window-bar"><i /><i /><i /><span>integration.apex</span></div>
+          <div className="window-bar">
+            <i />
+            <i />
+            <i />
+            <span>integration.apex</span>
+          </div>
           <div className="code-lines" aria-hidden="true">
             <span><b>public class</b> DonorSync {'{'}</span>
             <span className="indent"><em>@future</em>(callout=true)</span>
@@ -116,24 +162,53 @@ export default function Hero() {
           <div className="code-status"><i /> Production healthy</div>
         </div>
 
+        {/* Parallax Floating Badges */}
+        <motion.div
+          className="floating-chip chip-cloud"
+          style={{
+            x: reducedMotion ? 0 : mousePos.x * 0.5,
+            y: reducedMotion ? 0 : mousePos.y * 0.5,
+          }}
+        >
+          <Cloud size={14} /> Salesforce CRM
+        </motion.div>
+
+        <motion.div
+          className="floating-chip chip-code"
+          style={{
+            x: reducedMotion ? 0 : mousePos.x * -0.6,
+            y: reducedMotion ? 0 : mousePos.y * -0.6,
+          }}
+        >
+          <Code2 size={14} /> LWC + Apex
+        </motion.div>
+
+        <motion.div
+          className="floating-chip chip-data"
+          style={{
+            x: reducedMotion ? 0 : mousePos.x * 0.4,
+            y: reducedMotion ? 0 : mousePos.y * -0.4,
+          }}
+        >
+          <Database size={14} /> REST Integrations
+        </motion.div>
+
+        {/* Premium Lottie Developer Workspace Illustration */}
         <div className="orbit-illustration" aria-hidden="true">
-          <Lottie animationData={loaderAnimation} loop={!reducedMotion} />
+          {lottieData && (
+            <LottieComponent
+              animationData={lottieData}
+              loop={!reducedMotion}
+              style={{ width: '100%', height: '100%' }}
+            />
+          )}
           <Sparkles size={18} />
         </div>
-
-        <motion.div className="floating-chip chip-cloud" animate={reducedMotion ? {} : { y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity }}>
-          <Cloud size={16} /> Salesforce
-        </motion.div>
-        <motion.div className="floating-chip chip-code" animate={reducedMotion ? {} : { y: [0, 8, 0] }} transition={{ duration: 4.8, repeat: Infinity }}>
-          <Code2 size={16} /> LWC + Apex
-        </motion.div>
-        <motion.div className="floating-chip chip-data" animate={reducedMotion ? {} : { y: [0, -6, 0] }} transition={{ duration: 5.2, repeat: Infinity }}>
-          <Database size={16} /> Integrations
-        </motion.div>
       </motion.div>
 
       <a className="scroll-cue" href="#about" aria-label="Scroll to about">
-        <span>Scroll to explore</span><ArrowDown size={15} />
+        <span>Scroll to explore</span>
+        <ArrowDown size={14} />
       </a>
     </section>
   );

@@ -10,7 +10,7 @@ export default function Nav({ theme, onToggleTheme }) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 32);
+    const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -20,6 +20,7 @@ export default function Nav({ theme, onToggleTheme }) {
     const sections = ['hero', ...navLinks.map((link) => link.href.slice(1))]
       .map((id) => document.getElementById(id))
       .filter(Boolean);
+
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -27,8 +28,9 @@ export default function Nav({ theme, onToggleTheme }) {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
         if (visible) setActive(visible.target.id);
       },
-      { rootMargin: '-28% 0px -62%', threshold: [0.05, 0.25, 0.6] },
+      { rootMargin: '-30% 0px -60%', threshold: [0.05, 0.25, 0.5] }
     );
+
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
@@ -48,9 +50,18 @@ export default function Nav({ theme, onToggleTheme }) {
       <nav className="desktop-nav" aria-label="Primary navigation">
         {navLinks.map((link) => {
           const id = link.href.slice(1);
+          const isActive = active === id;
           return (
-            <a key={link.href} href={link.href} className={active === id ? 'active' : ''}>
+            <a key={link.href} href={link.href} className={isActive ? 'active' : ''}>
               {link.label}
+              {isActive && (
+                <motion.span
+                  layoutId="activeNavIndicator"
+                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-[var(--blue)] rounded-sm"
+                  style={{ originY: 0 }}
+                  transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                />
+              )}
             </a>
           );
         })}
@@ -67,6 +78,7 @@ export default function Nav({ theme, onToggleTheme }) {
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? 'Close navigation' : 'Open navigation'}
           aria-expanded={open}
+          style={{ display: 'none' }} /* Managed by media queries in CSS */
         >
           {open ? <X size={19} /> : <Menu size={19} />}
         </button>
@@ -78,7 +90,7 @@ export default function Nav({ theme, onToggleTheme }) {
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
             className="mobile-nav"
             aria-label="Mobile navigation"
           >
@@ -89,7 +101,7 @@ export default function Nav({ theme, onToggleTheme }) {
                 onClick={() => setOpen(false)}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.04 }}
+                transition={{ delay: index * 0.04, ease: 'easeOut' }}
               >
                 <span>0{index + 1}</span>{link.label}
               </motion.a>
