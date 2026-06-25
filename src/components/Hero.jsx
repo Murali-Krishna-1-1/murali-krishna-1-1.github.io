@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { motion, useReducedMotion } from 'motion/react';
-import Lottie from 'lottie-react';
+import LottieComponent from 'lottie-react';
 import { ArrowDown, ArrowUpRight, CheckCircle2, Cloud, Code2, Database, Sparkles } from 'lucide-react';
 import { heroRoles, siteMeta } from '../data/content';
 import { loaderAnimation } from '../data/loaderAnimation';
 import profilePhoto from '../../assets/photo.jpg';
+
+const Lottie = typeof LottieComponent === 'function' ? LottieComponent : (LottieComponent.default || LottieComponent);
 
 const reveal = {
   hidden: { opacity: 0, y: 24 },

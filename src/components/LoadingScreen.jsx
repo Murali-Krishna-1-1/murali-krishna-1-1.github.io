@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from 'motion/react';
-import Lottie from 'lottie-react';
+import LottieComponent from 'lottie-react';
 import { loaderAnimation } from '../data/loaderAnimation';
+
+const Lottie = typeof LottieComponent === 'function' ? LottieComponent : (LottieComponent.default || LottieComponent);
 
 export default function LoadingScreen({ visible }) {
   return (

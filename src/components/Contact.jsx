@@ -1,8 +1,10 @@
-import Lottie from 'lottie-react';
+import LottieComponent from 'lottie-react';
 import { ArrowUpRight, BriefcaseBusiness, Code2, Download, Mail, Send } from 'lucide-react';
 import Reveal from './Reveal';
 import { loaderAnimation } from '../data/loaderAnimation';
 import { siteMeta } from '../data/content';
+
+const Lottie = typeof LottieComponent === 'function' ? LottieComponent : (LottieComponent.default || LottieComponent);
 
 const links = [
   { label: 'Email', value: 'Start a conversation', href: `mailto:${siteMeta.email}`, icon: Mail },
