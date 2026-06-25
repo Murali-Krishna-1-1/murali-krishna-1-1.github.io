@@ -1,352 +1,59 @@
-# ✨ **Murali Krishna — Salesforce Developer**
+# Murali Krishna — Portfolio
 
+React + Vite + Tailwind CSS v4 + Framer Motion. Replaces the previous
+single-file static HTML site.
 
+## Local development
 
+```bash
+npm install
+npm run dev
+```
 
+Opens at `http://localhost:5173`.
 
-## 👋 Hello!
+## Build
 
+```bash
+npm run build      # outputs to dist/
+npm run preview    # serve the production build locally to sanity-check it
+```
 
+## Deploying to GitHub Pages
 
+This repo deploys automatically via GitHub Actions (`.github/workflows/deploy.yml`)
+on every push to `main`. No manual build/upload step needed.
 
+**One-time setup in GitHub (if not already done):**
 
-I'm **Murali Krishna**, a Salesforce Developer specializing in **Apex, LWC, REST Integrations, Pardot Automation**, and **Donation Processing Systems**.
+1. Go to the repo → **Settings → Pages**.
+2. Under "Build and deployment", set **Source** to **GitHub Actions**.
+3. Push to `main` — the workflow builds the site and publishes it.
 
+Since this repo is `Murali-Krishna-1-1.github.io` (a user/org Pages repo,
+not a project repo), the site is served from the root domain
+`https://murali-krishna-1-1.github.io/` — `vite.config.js` is already set
+with `base: '/'` to match this. If you ever move this code into a
+different (project) repo instead, change `base` to `'/repo-name/'`.
 
-I enjoy building high-quality Salesforce applications, automating business processes, and integrating cloud systems with real-world platforms.
+## Project structure
 
+```
+src/
+  components/   one file per section (Hero, Skills, Projects, etc.)
+  hooks/        useTypewriter, useMouseParallax, useTheme, useCustomCursor
+  data/         content.js — all site copy/content lives here
+  index.css     design tokens (colors, fonts) + global styles
+```
 
+To update content (projects, skills, experience, certifications), edit
+`src/data/content.js` — no JSX changes needed for text/data updates.
 
+## Notes
 
-
----
-
-
-
-
-
-# 🚀 **About Me**
-
-
-
-
-
-* 💼 Salesforce Developer with hands-on experience in **Apex, LWC, Aura, REST APIs, Pardot, and NPSP**
-
-
-* 🔗 Built integrations with **PayPal, iDonate, and Every.org**
-
-
-* ⚙️ Developed large-scale **Batch Apex** solutions processing 6M+ records
-
-
-* 🎯 Automation specialist for **donation workflows** & **event integrations**
-
-
-* 🌐 Experience in **WordPress development** + API sync
-
-
-* ❤️ Passionate about building reliable, scalable, future-proof systems
-
-
-
-
-
----
-
-
-
-
-
-# 🛠️ **Technical Skills**
-
-
-
-
-
-### **Salesforce Development**
-
-
-
-
-
-* Apex (Triggers, Batch, Schedulable, Queueable)
-
-
-* Lightning Web Components (LWC)
-
-
-* Aura Components
-
-
-* Visualforce
-
-
-* SOQL / SOSL
-
-
-* Platform Events
-
-
-* Salesforce Metadata & Tooling APIs
-
-
-
-
-
-### **Integrations**
-
-
-
-
-
-* REST / SOAP APIs
-
-
-* OAuth 2.0
-
-
-* Apex Callouts
-
-
-* Payment Platforms
-
-
-
-
-
-  * PayPal
-
-
-  * iDonate
-
-
-  * Every.org
-
-
-* Eventbrite → Salesforce
-
-
-
-
-
-### **Salesforce Admin**
-
-
-
-
-
-* Data Model Design
-
-
-* Security Model (OWD, Profiles, Roles, Sharing)
-
-
-* Flows, Process Builder, Workflow Rules
-
-
-* Reports & Dashboards
-
-
-* Declarative automation
-
-
-
-
-
-### **Other Tools**
-
-
-
-
-
-* JavaScript, HTML, CSS
-
-
-* WordPress (Forms + API integrations)
-
-
-* Git / GitHub
-
-
-* Java (OOP)
-
-
-
-
-
----
-
-
-
-
-
-# 📦 **Highlighted Projects**
-
-
-
-
-
-### 🔹 **Donation Automation System**
-
-
-
-
-
-Automated syncing of online donations from PayPal, iDonate, and Every.org into Salesforce NPSP.
-
-
-Includes reconciliation, error logging, retry logic, and deduplication.
-
-
-
-
-
-### 🔹 **Pardot Engagement Programs**
-
-
-
-
-
-Created automated donor journeys, lead scoring, segmentation flows, and email nurturing processes.
-
-
-
-
-
-### 🔹 **Logistics Data Integration**
-
-
-
-
-
-REST API integration with Batch Apex that processed **5–6 million records** with optimized performance and robust error handling.
-
-
-
-
-
-### 🔹 **Eventbrite Integration**
-
-
-
-
-
-Automated event registrations → Salesforce contacts/campaigns with real-time sync.
-
-
-
-
-
----
-
-
-
-
-
-# 🎓 **Certifications**
-
-
-
-
-
-* 🏅 Salesforce Platform Developer I
-
-
-* 🏅 Salesforce Developer Internship
-
-
-* 🏅 HackerRank JavaScript (Basic Certificate)
-
-
-
-
-
----
-
-
-
-
-
-# 🎓 **Education**
-
-
-
-
-
-* **MCA**, Jain University (2024–2026)
-
-
-* **B.Sc. IT**, NGM College (2020–2023)
-
-
-
-
-
----
-
-
-
-
-
-# 🌐 **Portfolio Website**
-
-
-
-
-
-👉 [https://murali-krishna-1-1.github.io/](https://murali-krishna-1-1.github.io/)
-
-
-
-
-
-Built using **HTML, CSS, GitHub Pages**, and optimized for clean, dark-mode UI.
-
-
-
-
-
----
-
-
-
-
-
-# 📬 **Contact Me**
-
-
-
-
-
-* 📧 Email: **[muralikrishna17b@gmail.com](mailto:muralikrishna17b@gmail.com)**
-
-
-* 🔗 LinkedIn: **[https://www.linkedin.com/in/iam-murali](https://www.linkedin.com/in/iam-murali)**
-
-
-* 🌍 Portfolio: **[https://murali-krishna-1-1.github.io/](https://murali-krishna-1-1.github.io/)**
-
-
-
-
-
----
-
-
-
-
-
-# ⭐ **Thanks for visiting my GitHub!**
-
-
-
-
-
-If you'd like to collaborate, discuss Salesforce, or explore opportunities — feel free to reach out!
-
-
-
-
-
----
+- Light/dark theme toggle persists via `localStorage` and respects the
+  visitor's OS preference on first visit.
+- The hero's dot-grid background reacts to mouse movement (desktop only,
+  disabled under 1024px width) instead of a background video.
+- The Projects carousel is touch/drag-friendly (Framer Motion drag, not a
+  third-party carousel library).
