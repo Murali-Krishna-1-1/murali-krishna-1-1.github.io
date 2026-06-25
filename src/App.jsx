@@ -18,7 +18,6 @@ import Terminal from './components/Terminal';
 import Blog from './components/Blog';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import AIAssistant from './components/AIAssistant';
 import DiagnosticsOverlay from './components/DiagnosticsOverlay';
 import { useTheme } from './hooks/useTheme';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
@@ -132,7 +131,6 @@ export default function App() {
       </main>
       
       <Footer />
-      <AIAssistant />
       
       <DiagnosticsOverlay
         isOpen={diagnosticsOpen}
