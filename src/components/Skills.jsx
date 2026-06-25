@@ -1,51 +1,58 @@
-import { Code, Monitor, Link2, MapPin, Settings, Heart } from 'lucide-react';
+import { Cloud, Database, GitBranch, LayoutTemplate, Network, ServerCog } from 'lucide-react';
+import { motion } from 'motion/react';
 import Reveal from './Reveal';
 import SectionLabel from './SectionLabel';
 import { skills } from '../data/content';
 
-const ICONS = {
-  code: Code,
-  monitor: Monitor,
-  link: Link2,
-  'map-pin': MapPin,
-  settings: Settings,
-  heart: Heart,
+const icons = {
+  cloud: Cloud,
+  layout: LayoutTemplate,
+  server: ServerCog,
+  network: Network,
+  database: Database,
+  git: GitBranch,
 };
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-32 px-6 md:px-12 bg-surface">
-      <div className="max-w-7xl mx-auto">
+    <section id="skills" className="section section-skills">
+      <div className="section-shell">
         <Reveal>
-          <SectionLabel>Technical Arsenal</SectionLabel>
+          <SectionLabel
+            eyebrow="02 / Capabilities"
+            title="Deep platform skill. Broad product range."
+            description="The tools change. The standard stays the same: thoughtful architecture and software that holds up in production."
+          />
         </Reveal>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px border border-border rounded-md overflow-hidden mt-2">
-          {skills.map((skill, i) => {
-            const Icon = ICONS[skill.icon] || Code;
+        <motion.div
+          className="skills-grid"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-8% 0px' }}
+          variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+        >
+          {skills.map((skill) => {
+            const Icon = icons[skill.icon];
             return (
-              <Reveal
-                key={skill.title}
-                delay={(i % 3) * 0.05}
-                className="relative bg-bg p-8 border border-border group overflow-hidden transition-colors duration-300 hover:bg-surface"
+              <motion.article
+                key={skill.category}
+                className={`skill-card tone-${skill.accent}`}
+                variants={{
+                  hidden: { opacity: 0, y: 28 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] } },
+                }}
               >
-                <span className="absolute top-0 left-0 h-0.5 w-0 bg-accent transition-[width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:w-full" />
-                <div className="font-mono text-[0.62rem] tracking-[0.18em] uppercase text-accent mb-3">
-                  {skill.category}
+                <div className="skill-icon"><Icon size={22} /></div>
+                <span className="skill-category">{skill.category}</span>
+                <h3>{skill.title}</h3>
+                <p>{skill.description}</p>
+                <div className="skill-tags">
+                  {skill.list.map((item) => <span key={item}>{item}</span>)}
                 </div>
-                <div className="text-[1.15rem] font-semibold mb-3">{skill.title}</div>
-                <div className="text-[0.88rem] text-muted leading-[1.9] space-y-0.5">
-                  {skill.list.map((line) => (
-                    <div key={line}>{line}</div>
-                  ))}
-                </div>
-                <Icon
-                  size={28}
-                  className="absolute bottom-6 right-6 text-border transition-colors duration-300 group-hover:text-accent"
-                />
-              </Reveal>
+              </motion.article>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

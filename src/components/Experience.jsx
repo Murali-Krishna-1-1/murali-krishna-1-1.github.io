@@ -1,44 +1,55 @@
+import { motion } from 'motion/react';
+import { CheckCircle2 } from 'lucide-react';
 import Reveal from './Reveal';
 import SectionLabel from './SectionLabel';
 import { experience } from '../data/content';
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-32 px-6 md:px-12 bg-surface">
-      <div className="max-w-7xl mx-auto">
+    <section id="experience" className="section section-experience">
+      <div className="section-shell">
         <Reveal>
-          <SectionLabel>Experience</SectionLabel>
+          <SectionLabel
+            eyebrow="04 / Experience"
+            title="A record of shipping."
+            description="Growing responsibility across platform development, integrations, product interfaces, and end-to-end delivery."
+          />
         </Reveal>
-        <div className="mt-2">
-          {experience.map((job, i) => (
+
+        <div className="timeline">
+          <motion.div
+            className="timeline-line"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, margin: '-15% 0px' }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          />
+          {experience.map((job, index) => (
             <Reveal
-              key={job.company + job.date}
-              delay={i * 0.04}
-              className={`grid grid-cols-1 md:grid-cols-[180px_1fr] gap-4 md:gap-12 py-10 border-b border-border ${
-                i === 0 ? 'border-t' : ''
-              }`}
+              key={`${job.company}-${job.date}`}
+              direction={index % 2 === 0 ? 'right' : 'left'}
+              delay={index * 0.05}
+              className={`timeline-item ${index % 2 === 0 ? 'is-left' : 'is-right'}`}
             >
-              <div className="font-mono text-[0.7rem] tracking-[0.12em] text-muted pt-1">
-                {job.date}
-                {job.current && (
-                  <div className="flex items-center gap-2 text-accent mt-2">
-                    <span className="w-2 h-2 rounded-full bg-accent animate-pulse-dot" />
-                    Current
-                  </div>
-                )}
-              </div>
-              <div>
-                <div className="text-[1.4rem] font-bold tracking-[-0.015em]">{job.role}</div>
-                <div className="text-[0.9rem] text-muted mt-1">{job.company}</div>
-                <ul className="mt-5 text-[0.9rem] text-muted leading-[1.85] space-y-1">
-                  {job.points.map((point) => (
-                    <li key={point} className="pl-5 relative">
-                      <span className="absolute left-0 text-accent">–</span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <motion.span
+                className="timeline-dot"
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ type: 'spring', stiffness: 280, damping: 18, delay: index * 0.08 }}
+              />
+              <article>
+                <div className="job-meta">
+                  <span>{job.date}</span>
+                  {job.current && <span className="current-role"><i />Current</span>}
+                </div>
+                <h3>{job.role}</h3>
+                <div className="job-company">{job.company}<span>{job.location}</span></div>
+                <p>{job.summary}</p>
+                <div className="job-points">
+                  {job.points.map((point) => <span key={point}><CheckCircle2 size={15} />{point}</span>)}
+                </div>
+              </article>
             </Reveal>
           ))}
         </div>

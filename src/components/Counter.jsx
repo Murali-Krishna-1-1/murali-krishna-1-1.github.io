@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, animate } from 'motion/react';
+import { useInView, animate } from 'motion/react';
 
 export default function Counter({ value }) {
   const ref = useRef(null);

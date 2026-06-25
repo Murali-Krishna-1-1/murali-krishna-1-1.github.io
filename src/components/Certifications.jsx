@@ -1,45 +1,43 @@
+import { motion } from 'motion/react';
+import { ArrowUpRight, BadgeCheck, Clock3 } from 'lucide-react';
 import Reveal from './Reveal';
 import SectionLabel from './SectionLabel';
 import { certifications } from '../data/content';
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-32 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section id="certifications" className="section section-certifications">
+      <div className="section-shell">
         <Reveal>
-          <SectionLabel>Certifications</SectionLabel>
+          <SectionLabel
+            eyebrow="05 / Credentials"
+            title="Validated fundamentals. Continuous growth."
+            description="Certifications that support the work, with Platform Developer II currently in progress."
+          />
         </Reveal>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-2">
-          {certifications.map((cert, i) => (
-            <Reveal
-              key={cert.name}
-              delay={i * 0.05}
-              className={`border rounded-md p-6 bg-surface transition-[border-color,transform] duration-300 hover:border-accent hover:-translate-y-1 ${
-                cert.inProgress ? 'border-accent/25 bg-accent/[0.03]' : 'border-border'
-              }`}
-            >
-              <div
-                className={`font-mono text-[0.6rem] tracking-[0.14em] uppercase mb-2 ${
-                  cert.inProgress ? 'text-accent' : 'text-muted'
-                }`}
+        <div className="cert-grid">
+          {certifications.map((cert, index) => (
+            <Reveal key={cert.name} delay={index * 0.06} direction="scale">
+              <motion.article
+                className={`cert-card ${cert.inProgress ? 'is-progress' : ''}`}
+                whileHover={{ y: -6, rotateX: 2, rotateY: index % 2 ? -2 : 2 }}
+                transition={{ duration: 0.25 }}
               >
-                {cert.issuer}
-              </div>
-              <div className="text-[1rem] font-semibold mb-4 leading-[1.35]">{cert.name}</div>
-              {cert.verifyUrl ? (
-                <a
-                  href={cert.verifyUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-mono text-[0.62rem] tracking-[0.1em] uppercase text-accent border-b border-transparent hover:border-accent transition-colors duration-300"
-                >
-                  {cert.verifyLabel}
-                </a>
-              ) : (
-                <span className="font-mono text-[0.62rem] tracking-[0.1em] uppercase text-muted">
-                  {cert.verifyLabel}
-                </span>
-              )}
+                <div className="cert-shine" />
+                <div className="cert-top">
+                  <span className="cert-code">{cert.code}</span>
+                  {cert.inProgress ? <Clock3 size={20} /> : <BadgeCheck size={20} />}
+                </div>
+                <span className="cert-issuer">{cert.issuer} / {cert.date}</span>
+                <h3>{cert.name}</h3>
+                {cert.verifyUrl ? (
+                  <a href={cert.verifyUrl} target="_blank" rel="noreferrer">
+                    Verify credential <ArrowUpRight size={15} />
+                  </a>
+                ) : (
+                  <span className="cert-status"><i />Active preparation</span>
+                )}
+              </motion.article>
             </Reveal>
           ))}
         </div>

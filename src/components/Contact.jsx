@@ -1,53 +1,48 @@
+import Lottie from 'lottie-react';
+import { ArrowUpRight, BriefcaseBusiness, Code2, Download, Mail, Send } from 'lucide-react';
 import Reveal from './Reveal';
-import SectionLabel from './SectionLabel';
+import { loaderAnimation } from '../data/loaderAnimation';
 import { siteMeta } from '../data/content';
+
+const links = [
+  { label: 'Email', value: 'Start a conversation', href: `mailto:${siteMeta.email}`, icon: Mail },
+  { label: 'LinkedIn', value: 'Connect professionally', href: siteMeta.linkedin, icon: BriefcaseBusiness, external: true },
+  { label: 'GitHub', value: 'Explore the code', href: siteMeta.github, icon: Code2, external: true },
+  { label: 'Resume', value: 'Download the PDF', href: siteMeta.resume, icon: Download, external: true },
+];
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-40 px-6 md:px-12 text-center">
-      <div className="max-w-3xl mx-auto">
-        <Reveal>
-          <SectionLabel center>Let's Build Something</SectionLabel>
-        </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="text-[clamp(3rem,7vw,8rem)] font-bold tracking-[-0.03em] leading-[0.95] mb-10">
-            Ready
-            <br />
-            <em className="italic font-extralight text-muted not-italic font-[200]">to ship</em>
-            <br />
-            production.
-          </h2>
-        </Reveal>
-        <Reveal delay={0.1}>
-          <p className="text-[1.05rem] text-muted max-w-[500px] mx-auto mb-12 leading-[1.7]">
-            I build Salesforce solutions that scale — from architecture to deployment.
-            If you need expert Apex, LWC, or integration work, let's talk.
-          </p>
-        </Reveal>
-        <Reveal delay={0.15} className="flex gap-3 justify-center flex-wrap">
-          <a
-            href={`mailto:${siteMeta.email}`}
-            className="font-mono text-[0.72rem] tracking-[0.1em] uppercase px-7 py-3 border border-accent text-accent rounded-sm transition-colors duration-300 hover:bg-accent hover:text-bg"
-          >
-            {siteMeta.email}
-          </a>
-          <a
-            href={siteMeta.github}
-            target="_blank"
-            rel="noreferrer"
-            className="font-mono text-[0.72rem] tracking-[0.1em] uppercase px-7 py-3 border border-border text-muted rounded-sm transition-colors duration-300 hover:border-text hover:text-text"
-          >
-            GitHub ↗
-          </a>
-          <a
-            href={siteMeta.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            className="font-mono text-[0.72rem] tracking-[0.1em] uppercase px-7 py-3 border border-border text-muted rounded-sm transition-colors duration-300 hover:border-text hover:text-text"
-          >
-            LinkedIn ↗
-          </a>
-        </Reveal>
+    <section id="contact" className="section section-contact">
+      <div className="section-shell">
+        <div className="contact-panel">
+          <Reveal className="contact-copy">
+            <span className="section-eyebrow">06 / Contact</span>
+            <h2>Have a difficult system to simplify?</h2>
+            <p>
+              I&apos;m open to Salesforce and full-stack roles where thoughtful engineering,
+              ownership, and real user outcomes matter.
+            </p>
+            <a className="button button-primary" href={`mailto:${siteMeta.email}`}>
+              Send me a message <Send size={16} />
+            </a>
+          </Reveal>
+
+          <Reveal className="contact-links" delay={0.1}>
+            {links.map(({ label, value, href, icon: Icon, external }) => (
+              <a key={label} href={href} target={external ? '_blank' : undefined} rel={external ? 'noreferrer' : undefined}>
+                <span className="contact-icon"><Icon size={19} /></span>
+                <span><small>{label}</small><strong>{value}</strong></span>
+                <ArrowUpRight size={17} />
+              </a>
+            ))}
+          </Reveal>
+
+          <div className="contact-orbit" aria-hidden="true">
+            <Lottie animationData={loaderAnimation} loop />
+            <Send size={24} />
+          </div>
+        </div>
       </div>
     </section>
   );

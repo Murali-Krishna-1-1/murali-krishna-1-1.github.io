@@ -1,128 +1,182 @@
-import { useRef, useState } from 'react';
-import { motion } from 'motion/react';
-import { ArrowLeft, ArrowRight, MapPin, Heart, FileText, Copy, LayoutGrid } from 'lucide-react';
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import {
+  ArrowUpRight,
+  Check,
+  CircleDollarSign,
+  Code2,
+  FileCheck2,
+  MapPin,
+  Search,
+  ShieldCheck,
+  Users,
+} from 'lucide-react';
 import Reveal from './Reveal';
 import SectionLabel from './SectionLabel';
-import { projects } from '../data/content';
-
-const ICONS = {
-  'map-pin': MapPin,
-  heart: Heart,
-  'file-text': FileText,
-  copy: Copy,
-  'layout-grid': LayoutGrid,
-};
-
-const CARD_WIDTH = 560;
-const GAP = 24;
+import { projectFilters, projects, siteMeta } from '../data/content';
 
 export default function Projects() {
-  const trackRef = useRef(null);
-  const [index, setIndex] = useState(0);
-
-  const maxIndex = projects.length - 1;
-
-  function go(dir) {
-    setIndex((i) => Math.max(0, Math.min(maxIndex, i + dir)));
-  }
+  const [filter, setFilter] = useState('All');
+  const visibleProjects = filter === 'All'
+    ? projects
+    : projects.filter((project) => project.categories.includes(filter));
 
   return (
-    <section id="projects" className="pt-32 pb-16 px-6 md:px-12">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="section section-projects">
+      <div className="section-shell">
         <Reveal>
-          <SectionLabel>Featured Work</SectionLabel>
+          <SectionLabel
+            eyebrow="03 / Selected work"
+            title="Systems with real-world stakes."
+            description="A selection of production work across logistics, nonprofit operations, data quality, and secure stakeholder experiences."
+          />
         </Reveal>
 
-        <Reveal className="relative mt-2 overflow-hidden" delay={0.05}>
-          <motion.div
-            ref={trackRef}
-            className="flex gap-6 cursor-grab active:cursor-grabbing"
-            drag="x"
-            dragConstraints={{
-              left: -((CARD_WIDTH + GAP) * maxIndex),
-              right: 0,
-            }}
-            dragElastic={0.08}
-            animate={{ x: -((CARD_WIDTH + GAP) * index) }}
-            transition={{ type: 'spring', stiffness: 300, damping: 32 }}
-            onDragEnd={(_, info) => {
-              if (info.offset.x < -80) go(1);
-              else if (info.offset.x > 80) go(-1);
-            }}
-          >
-            {projects.map((project) => {
-              const Icon = ICONS[project.icon] || MapPin;
-              return (
-                <div
-                  key={project.id}
-                  style={{ width: `min(${CARD_WIDTH}px, 85vw)` }}
-                  className="shrink-0"
-                >
-                  <ProjectCard project={project} Icon={Icon} />
+        <Reveal className="filter-bar" delay={0.06}>
+          {projectFilters.map((item) => (
+            <button
+              type="button"
+              key={item}
+              onClick={() => setFilter(item)}
+              className={filter === item ? 'active' : ''}
+            >
+              {item}
+            </button>
+          ))}
+        </Reveal>
+
+        <motion.div layout className="projects-list">
+          <AnimatePresence mode="popLayout">
+            {visibleProjects.map((project, index) => (
+              <motion.article
+                layout
+                key={project.id}
+                initial={{ opacity: 0, scale: 0.97, y: 22 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.97, y: -12 }}
+                transition={{ duration: 0.48, delay: index * 0.05 }}
+                className={`project-case tone-${project.tone}`}
+              >
+                <div className="project-copy">
+                  <div className="project-number">{project.index}</div>
+                  <span className="project-eyebrow">{project.eyebrow}</span>
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <div className="project-impact"><Check size={15} />{project.impact}</div>
+                  <div className="project-stack">
+                    {project.stack.map((item) => <span key={item}>{item}</span>)}
+                  </div>
+                  <div className="project-actions">
+                    <a href={siteMeta.github} target="_blank" rel="noreferrer">
+                      <Code2 size={16} /> GitHub <ArrowUpRight size={14} />
+                    </a>
+                    <a href={`mailto:${siteMeta.email}?subject=${encodeURIComponent(`Demo request: ${project.title}`)}`}>
+                      Request demo <ArrowUpRight size={14} />
+                    </a>
+                  </div>
                 </div>
-              );
-            })}
-          </motion.div>
-        </Reveal>
+                <ProjectVisual type={project.visual} />
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
-        <div className="flex gap-3 mt-8">
-          <button
-            onClick={() => go(-1)}
-            disabled={index === 0}
-            aria-label="Previous project"
-            className="w-11 h-11 rounded-full border border-border flex items-center justify-center transition-colors duration-300 hover:border-accent hover:bg-accent hover:text-bg disabled:opacity-30 disabled:hover:border-border disabled:hover:bg-transparent disabled:hover:text-text"
-          >
-            <ArrowLeft size={18} />
-          </button>
-          <button
-            onClick={() => go(1)}
-            disabled={index === maxIndex}
-            aria-label="Next project"
-            className="w-11 h-11 rounded-full border border-border flex items-center justify-center transition-colors duration-300 hover:border-accent hover:bg-accent hover:text-bg disabled:opacity-30 disabled:hover:border-border disabled:hover:bg-transparent disabled:hover:text-text"
-          >
-            <ArrowRight size={18} />
-          </button>
-        </div>
+        {visibleProjects.length === 0 && (
+          <div className="empty-projects">
+            No public case study in this category yet. The capability is part of my broader stack.
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-function ProjectCard({ project, Icon }) {
+function BrowserFrame({ title, children }) {
   return (
-    <div className="border border-border rounded-md overflow-hidden bg-surface transition-colors duration-300 hover:border-accent select-none">
-      <div
-        className="h-[220px] relative flex items-center justify-center overflow-hidden"
-        style={{ background: project.bannerBg }}
-      >
-        <div className="text-[clamp(3rem,6vw,5.5rem)] font-bold tracking-[-0.04em] text-border/35 absolute select-none">
-          {project.bannerText}
-        </div>
-        <span className="absolute top-4 left-4 font-mono text-[0.6rem] tracking-[0.12em] uppercase px-3 py-1 border border-accent text-accent rounded-sm">
-          {project.tag}
-        </span>
-        <Icon size={64} className="absolute text-border/70" />
+    <div className="browser-frame">
+      <div className="browser-bar">
+        <div><i /><i /><i /></div>
+        <span>{title}</span>
+        <i className="browser-secure" />
       </div>
-      <div className="p-7">
-        <div className="font-mono text-[0.6rem] tracking-[0.14em] uppercase text-muted mb-2">
-          {project.arch}
-        </div>
-        <div className="text-[1.35rem] font-bold mb-4 tracking-[-0.015em]">{project.title}</div>
-        <ul className="text-[0.9rem] text-muted leading-[1.8] space-y-1">
-          {project.bullets.map((bullet) => (
-            <li key={bullet} className="pl-5 relative">
-              <span className="absolute left-0 text-accent">→</span>
-              {bullet}
-            </li>
-          ))}
-        </ul>
-        <div className="mt-5 px-4 py-3 bg-accent/[0.06] border-l-2 border-accent rounded-r-sm text-[0.85rem] text-text">
-          <strong className="font-mono text-[0.62rem] tracking-[0.1em] uppercase text-accent block mb-1">
-            Impact
-          </strong>
-          {project.impact}
-        </div>
-      </div>
+      <div className="browser-body">{children}</div>
     </div>
+  );
+}
+
+function ProjectVisual({ type }) {
+  if (type === 'map') {
+    return (
+      <BrowserFrame title="Shipment command center">
+        <div className="mock-toolbar"><strong>Live fleet</strong><span>18 active</span></div>
+        <div className="map-mock">
+          <div className="map-route route-one" />
+          <div className="map-route route-two" />
+          <span className="map-pin pin-one"><MapPin size={15} /></span>
+          <span className="map-pin pin-two"><MapPin size={15} /></span>
+          <span className="map-pin pin-three"><MapPin size={15} /></span>
+          <div className="map-card"><i /><span><strong>Tracker MK-204</strong>Updated just now</span></div>
+        </div>
+        <div className="mock-stats"><span><strong>99.8%</strong>Signal health</span><span><strong>12m</strong>Last update</span><span><strong>24</strong>Events today</span></div>
+      </BrowserFrame>
+    );
+  }
+
+  if (type === 'donor') {
+    return (
+      <BrowserFrame title="Donor operations">
+        <div className="mock-toolbar"><strong>Giving overview</strong><span>This month</span></div>
+        <div className="donor-chart">
+          {[45, 72, 52, 88, 68, 96, 82, 100].map((height, index) => <i key={index} style={{ height: `${height}%` }} />)}
+        </div>
+        <div className="integration-row">
+          <span>PP</span><b /><span>EV</span><b /><span>ID</span><b /><span>SF</span>
+        </div>
+        <div className="mock-stats"><span><CircleDollarSign /><strong>1,284</strong>Gifts synced</span><span><Users /><strong>98%</strong>Matched</span></div>
+      </BrowserFrame>
+    );
+  }
+
+  if (type === 'import') {
+    return (
+      <BrowserFrame title="Benevity import studio">
+        <div className="import-drop"><FileCheck2 size={30} /><strong>benevity-june.csv</strong><span>1,248 rows validated</span></div>
+        <div className="progress-row"><span>Matching donor records</span><strong>92%</strong><i><b /></i></div>
+        <div className="validation-list"><span><Check />1,172 ready to upsert</span><span><Search />64 require review</span><span><ShieldCheck />12 duplicates protected</span></div>
+      </BrowserFrame>
+    );
+  }
+
+  if (type === 'portal') {
+    return (
+      <BrowserFrame title="Board member portal">
+        <div className="portal-head"><span className="portal-avatar">MK</span><div><small>Welcome back</small><strong>Board workspace</strong></div></div>
+        <div className="portal-grid">
+          <div><FileCheck2 /><span><strong>Meeting pack</strong>Updated today</span></div>
+          <div><ShieldCheck /><span><strong>Secure reports</strong>4 new files</span></div>
+          <div><Users /><span><strong>Directory</strong>24 members</span></div>
+          <div><CircleDollarSign /><span><strong>Giving summary</strong>FY 2026</span></div>
+        </div>
+      </BrowserFrame>
+    );
+  }
+
+  return (
+    <BrowserFrame title="Duplicate review">
+      <div className="mock-toolbar"><strong>Potential matches</strong><span>Confidence</span></div>
+      <div className="match-card">
+        <span className="match-score">94%</span>
+        <div><strong>Murali K.</strong><small>murali@example.com</small></div>
+        <b>matches</b>
+        <div><strong>M. Krishna</strong><small>murali@example.com</small></div>
+      </div>
+      <div className="match-card">
+        <span className="match-score">87%</span>
+        <div><strong>A. Rivera</strong><small>San Jose, CA</small></div>
+        <b>review</b>
+        <div><strong>Alex Rivera</strong><small>San Jose, CA</small></div>
+      </div>
+      <div className="review-actions"><button type="button">Keep separate</button><button type="button">Review match</button></div>
+    </BrowserFrame>
   );
 }
