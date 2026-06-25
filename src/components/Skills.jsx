@@ -4,13 +4,13 @@ import SectionLabel from './SectionLabel';
 import { skills } from '../data/content';
 
 const lordicons = {
-  cloud: 'https://cdn.lordicon.com/sdhfyvhz.json',
-  layout: 'https://cdn.lordicon.com/wpyrskro.json',
-  server: 'https://cdn.lordicon.com/qyqxdwqf.json',
-  network: 'https://cdn.lordicon.com/fpipwcoe.json',
-  database: 'https://cdn.lordicon.com/vufjamxh.json',
-  git: 'https://cdn.lordicon.com/mrdiiocu.json',
-  tools: 'https://cdn.lordicon.com/lvdlnyju.json',
+  cloud: 'https://cdn.lordicon.com/rhvddzym.json',
+  layout: 'https://cdn.lordicon.com/lbjtvqiv.json',
+  server: 'https://cdn.lordicon.com/gqdnbnwt.json',
+  network: 'https://cdn.lordicon.com/sbiheqdr.json',
+  database: 'https://cdn.lordicon.com/gqdnbnwt.json',
+  git: 'https://cdn.lordicon.com/sbiheqdr.json',
+  tools: 'https://cdn.lordicon.com/sbiheqdr.json',
 };
 
 export default function Skills() {

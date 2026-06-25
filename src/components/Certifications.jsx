@@ -58,7 +58,7 @@ export default function Certifications() {
                     <Clock3 size={20} className="text-[var(--muted)]" />
                   ) : (
                     <lord-icon
-                      src="https://cdn.lordicon.com/oqdmxhku.json"
+                      src="https://cdn.lordicon.com/gsqxdxog.json"
                       trigger="loop"
                       colors="primary:var(--blue),secondary:var(--violet)"
                       style={{ width: '24px', height: '24px' }}

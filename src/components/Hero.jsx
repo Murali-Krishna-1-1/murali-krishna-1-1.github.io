@@ -29,22 +29,7 @@ const itemVariants = {
 export default function Hero() {
   const [role, setRole] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [lottieData, setLottieData] = useState(null);
   const reducedMotion = useReducedMotion();
-
-  // Fetch premium developer Lottie animation from CDN; fallback to local animation on error/slow network
-  useEffect(() => {
-    fetch('https://lottie.host/8e2f89f7-bf82-4c28-98cd-bb8bdf5ad915/1vUeXWvIeS.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Network response was not ok');
-        return res.json();
-      })
-      .then((data) => setLottieData(data))
-      .catch((err) => {
-        console.warn('Failed to fetch premium Lottie animation, falling back to local loader:', err);
-        setLottieData(loaderAnimation);
-      });
-  }, []);
 
   useEffect(() => {
     if (reducedMotion) return undefined;
@@ -195,13 +180,11 @@ export default function Hero() {
 
         {/* Premium Lottie Developer Workspace Illustration */}
         <div className="orbit-illustration" aria-hidden="true">
-          {lottieData && (
-            <LottieComponent
-              animationData={lottieData}
-              loop={!reducedMotion}
-              style={{ width: '100%', height: '100%' }}
-            />
-          )}
+          <Lottie
+            animationData={loaderAnimation}
+            loop={!reducedMotion}
+            style={{ width: '100%', height: '100%' }}
+          />
           <Sparkles size={18} />
         </div>
       </motion.div>

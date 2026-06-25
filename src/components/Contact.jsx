@@ -12,13 +12,13 @@ const links = [
     label: 'Email',
     value: 'Start a conversation',
     href: `mailto:${siteMeta.email}`,
-    lordicon: 'https://cdn.lordicon.com/nzxtymzq.json',
+    lordicon: 'https://cdn.lordicon.com/psnhyobz.json',
   },
   {
     label: 'LinkedIn',
     value: 'Connect professionally',
     href: siteMeta.linkedin,
-    lordicon: 'https://cdn.lordicon.com/ljvtreqy.json',
+    lordicon: 'https://cdn.lordicon.com/nocovwne.json',
     external: true,
   },
   {
@@ -32,28 +32,12 @@ const links = [
     label: 'Resume',
     value: 'Download the PDF',
     href: siteMeta.resume,
-    lordicon: 'https://cdn.lordicon.com/qvzdgmqd.json',
+    lordicon: 'https://cdn.lordicon.com/gsqxdxog.json',
     external: true,
   },
 ];
 
 export default function Contact() {
-  const [lottieData, setLottieData] = useState(null);
-
-  useEffect(() => {
-    // Fetch a premium paper-plane messaging Lottie animation
-    fetch('https://lottie.host/e2b60abf-7984-48ff-9844-ba3d85d7bb5b/HhP4qWj6hZ.json')
-      .then((res) => {
-        if (!res.ok) throw new Error('Failed to fetch contact Lottie');
-        return res.json();
-      })
-      .then((data) => setLottieData(data))
-      .catch((err) => {
-        console.warn('Failed to load contact Lottie, using local fallback:', err);
-        setLottieData(loaderAnimation);
-      });
-  }, []);
-
   return (
     <section id="contact" className="section section-contact">
       <div className="section-shell">
@@ -96,13 +80,11 @@ export default function Contact() {
 
           {/* Premium Lottie Messaging Illustration */}
           <div className="contact-orbit" aria-hidden="true">
-            {lottieData && (
-              <Lottie
-                animationData={lottieData}
-                loop
-                style={{ width: '100%', height: '100%' }}
-              />
-            )}
+            <Lottie
+              animationData={loaderAnimation}
+              loop
+              style={{ width: '100%', height: '100%' }}
+            />
           </div>
         </div>
       </div>

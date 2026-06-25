@@ -53,7 +53,7 @@ export default function About() {
               <div>
                 <div className="mb-4 flex h-[36px] items-center">
                   <lord-icon
-                    src="https://cdn.lordicon.com/oqdmxhku.json"
+                    src="https://cdn.lordicon.com/gsqxdxog.json"
                     trigger="hover"
                     colors="primary:var(--blue),secondary:var(--violet)"
                     style={{ width: '36px', height: '36px' }}
@@ -68,7 +68,7 @@ export default function About() {
               <div>
                 <div className="mb-4 flex h-[36px] items-center">
                   <lord-icon
-                    src="https://cdn.lordicon.com/kdduutho.json"
+                    src="https://cdn.lordicon.com/nocovwne.json"
                     trigger="hover"
                     colors="primary:var(--blue),secondary:var(--violet)"
                     style={{ width: '36px', height: '36px' }}
@@ -83,7 +83,7 @@ export default function About() {
               <div>
                 <div className="mb-4 flex h-[36px] items-center">
                   <lord-icon
-                    src="https://cdn.lordicon.com/vzxhnpqy.json"
+                    src="https://cdn.lordicon.com/psnhyobz.json"
                     trigger="hover"
                     colors="primary:var(--blue),secondary:var(--violet)"
                     style={{ width: '36px', height: '36px' }}
@@ -98,7 +98,7 @@ export default function About() {
               <div>
                 <div className="mb-4 flex h-[36px] items-center">
                   <lord-icon
-                    src="https://cdn.lordicon.com/qhgubeir.json"
+                    src="https://cdn.lordicon.com/rhvddzym.json"
                     trigger="hover"
                     colors="primary:var(--blue),secondary:var(--violet)"
                     style={{ width: '36px', height: '36px' }}
