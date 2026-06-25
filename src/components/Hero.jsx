@@ -13,7 +13,7 @@ const ROLES = [
   'Salesforce Platform Specialist',
   'Apex & LWC Developer',
   'Cloud & Integration Engineer',
-  'Enterprise CRM Developer'
+  'Enterprise CRM Developer',
 ];
 
 const containerVariants = {
@@ -40,9 +40,9 @@ export default function Hero() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [typingSpeed, setTypingSpeed] = useState(100);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [runStatus, setRunStatus] = useState('idle');
   const reducedMotion = useReducedMotion();
 
-  // Custom high-fidelity typewriter loop
   useEffect(() => {
     if (reducedMotion) {
       setTypedText(ROLES[0]);
@@ -55,20 +55,20 @@ export default function Hero() {
     const handleType = () => {
       if (!isDeleting) {
         setTypedText(fullText.substring(0, typedText.length + 1));
-        setTypingSpeed(80); // Typing speed
+        setTypingSpeed(80);
 
         if (typedText === fullText) {
-          timer = setTimeout(() => setIsDeleting(true), 2000); // 2s pause
+          timer = setTimeout(() => setIsDeleting(true), 2000);
           return;
         }
       } else {
         setTypedText(fullText.substring(0, typedText.length - 1));
-        setTypingSpeed(40); // Deleting speed
+        setTypingSpeed(40);
 
         if (typedText === '') {
           setIsDeleting(false);
           setRoleIdx((prev) => (prev + 1) % ROLES.length);
-          timer = setTimeout(() => {}, 400); // Small delay before typing next
+          timer = setTimeout(() => {}, 400);
           return;
         }
       }
@@ -92,6 +92,18 @@ export default function Hero() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [reducedMotion]);
 
+  const handleRunApex = () => {
+    if (runStatus !== 'idle') return;
+    setRunStatus('compiling');
+    setTimeout(() => {
+      setRunStatus('running');
+      setTimeout(() => {
+        setRunStatus('success');
+        setTimeout(() => setRunStatus('idle'), 3000);
+      }, 900);
+    }, 700);
+  };
+
   return (
     <section id="hero" className="hero-section">
       <motion.div
@@ -100,21 +112,20 @@ export default function Hero() {
         animate="visible"
         className="hero-copy"
       >
-        {/* Animated Production Status Badge */}
-        <motion.div variants={itemVariants} className="status-badge mb-4">
-          <span className="status-dot green animate-pulse" />
-          <span>● Environment: Production Synced (v61.0)</span>
+        <motion.div variants={itemVariants} className="status-badge">
+          <span className="status-dot green" />
+          <span>Environment: Production Synced (v61.0)</span>
         </motion.div>
 
         <motion.div variants={itemVariants} className="availability">
           <i /> Available for select roles &amp; projects
         </motion.div>
 
-        <motion.p variants={itemVariants} className="hero-kicker font-mono text-[11px] uppercase tracking-widest text-[var(--blue)]">
+        <motion.p variants={itemVariants} className="hero-kicker">
           Salesforce Platform &amp; Full Stack Architecture
         </motion.p>
 
-        <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight mt-2">
+        <motion.h1 variants={itemVariants}>
           I build systems
           <br />
           that make <span>complex work</span>
@@ -122,19 +133,19 @@ export default function Hero() {
           feel simple.
         </motion.h1>
 
-        <motion.div variants={itemVariants} className="role-line font-mono text-sm my-4">
+        <motion.div variants={itemVariants} className="role-line">
           <span>Specializing in </span>
-          <span className="role-window font-bold text-[var(--blue)]">
+          <span className="role-window">
             {typedText}
-            <span className="animate-pulse font-bold">|</span>
+            <span className="role-cursor">|</span>
           </span>
         </motion.div>
 
-        <motion.p variants={itemVariants} className="hero-summary text-sm md:text-base text-[var(--muted)] leading-relaxed max-w-lg">
+        <motion.p variants={itemVariants} className="hero-summary">
           Experienced Software Engineer delivering enterprise Salesforce integrations, custom web experiences, and robust automated data pipelines in NPSP.
         </motion.p>
 
-        <motion.div variants={itemVariants} className="hero-actions flex gap-4 mt-6">
+        <motion.div variants={itemVariants} className="hero-actions">
           <a className="button button-primary" href="#projects">
             Explore my work <ArrowDown size={14} />
           </a>
@@ -143,17 +154,17 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        <motion.div variants={itemVariants} className="hero-proof flex flex-wrap gap-4 mt-8 pt-6 border-t border-[var(--border)]">
-          <div className="flex items-center gap-1.5 text-xs text-[var(--muted)]">
-            <CheckCircle2 size={14} className="text-[var(--blue)]" />
+        <motion.div variants={itemVariants} className="hero-proof">
+          <div>
+            <CheckCircle2 size={14} />
             <span><strong>PD1 Certified</strong></span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-[var(--muted)]">
-            <CheckCircle2 size={14} className="text-[var(--blue)]" />
+          <div>
+            <CheckCircle2 size={14} />
             <span><strong>3+ Years</strong> Production Experience</span>
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-[var(--muted)]">
-            <CheckCircle2 size={14} className="text-[var(--blue)]" />
+          <div>
+            <CheckCircle2 size={14} />
             <span><strong>88%+</strong> Apex Test Coverage</span>
           </div>
         </motion.div>
@@ -165,44 +176,79 @@ export default function Hero() {
         transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         className="hero-visual"
       >
-        <div className="profile-frame relative rounded-lg overflow-hidden">
-          <img src={profilePhoto} alt="Murali Krishna" fetchPriority="high" className="w-full object-cover" />
-          <div className="profile-overlay absolute inset-0" />
-          <div className="profile-caption absolute bottom-0 left-0 right-0 p-4 flex justify-between bg-gradient-to-t from-black/80 to-transparent">
+        <div className="profile-frame">
+          <img src={profilePhoto} alt="Murali Krishna" fetchPriority="high" />
+          <div className="profile-overlay" />
+          <div className="profile-caption">
             <div>
-              <span className="block text-[10px] text-gray-400 uppercase">Currently</span>
-              <strong className="text-xs text-white">Software Engineer</strong>
+              <span>Currently</span>
+              <strong>Software Engineer</strong>
             </div>
-            <div className="text-right">
-              <span className="block text-[10px] text-gray-400 uppercase">Building for</span>
-              <strong className="text-xs text-white">SETI Institute</strong>
+            <div>
+              <span>Building for</span>
+              <strong>SETI Institute</strong>
             </div>
           </div>
         </div>
 
-        <div className="code-panel glass-card font-mono text-[11px] p-4 rounded-lg mt-4">
-          <div className="window-bar flex justify-between items-center border-b border-[var(--border)] pb-2 mb-3">
-            <div className="flex gap-1">
-              <i className="w-2 h-2 rounded-full bg-red-500" />
-              <i className="w-2 h-2 rounded-full bg-yellow-500" />
-              <i className="w-2 h-2 rounded-full bg-green-500" />
+        <div className={`code-panel${runStatus !== 'idle' ? ' is-active' : ''}`}>
+          <div className="window-bar">
+            <div className="window-dots">
+              <i /><i /><i />
             </div>
-            <span className="text-[9px] text-[var(--muted)]">integration.apex</span>
+            <button
+              type="button"
+              className={`run-apex-btn run-apex-btn--${runStatus}`}
+              onClick={handleRunApex}
+              disabled={runStatus !== 'idle'}
+            >
+              {runStatus === 'idle' && '▶ Run Apex'}
+              {runStatus === 'compiling' && '⚡ Compiling...'}
+              {runStatus === 'running' && '⚙ Callout...'}
+              {runStatus === 'success' && '✓ Synced (18ms)'}
+            </button>
+            <span>integration.apex</span>
           </div>
-          <div className="code-lines flex flex-col gap-1 text-[var(--muted)] select-none" aria-hidden="true">
-            <span><b className="text-[var(--blue)]">public class</b> DonorSync {'{'}</span>
-            <span className="pl-4"><em className="text-[var(--violet)]">@future</em>(callout=true)</span>
-            <span className="pl-4"><b className="text-[var(--blue)]">static void</b> connect() {'{'}</span>
-            <span className="pl-8 text-white">CRM.unify(data);</span>
-            <span className="pl-4">{'}'}</span>
+          <div className="code-lines" aria-hidden="true">
+            <span className={runStatus === 'compiling' ? 'is-highlight' : ''}>
+              <b>public class</b> DonorSync {'{'}
+            </span>
+            <span className={`indent${runStatus === 'compiling' ? ' is-highlight' : ''}`}>
+              <em>@future</em>(callout=true)
+            </span>
+            <span className={`indent${runStatus === 'compiling' ? ' is-highlight' : ''}`}>
+              <b>static void</b> connect() {'{'}
+            </span>
+            <span className={`indent-two${runStatus === 'running' ? ' is-active-line' : ''}`}>
+              CRM.unify(data);
+            </span>
+            <span className="indent">{'}'}</span>
             <span>{'}'}</span>
           </div>
-          <div className="code-status border-t border-[var(--border)] pt-2 mt-3 flex items-center gap-1.5 text-[10px] text-[var(--green)]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--green)] animate-pulse" /> Production healthy
+          <div className={`code-status code-status--${runStatus}`}>
+            {runStatus === 'idle' && (
+              <>
+                <i /> Production healthy
+              </>
+            )}
+            {runStatus === 'compiling' && (
+              <>
+                <i className="is-amber" /> Compiling metadata package...
+              </>
+            )}
+            {runStatus === 'running' && (
+              <>
+                <i className="is-blue" /> Executing asynchronous callout...
+              </>
+            )}
+            {runStatus === 'success' && (
+              <>
+                <i /> Transaction Unified (v61.0)
+              </>
+            )}
           </div>
         </div>
 
-        {/* Parallax Floating Badges */}
         <motion.div
           className="floating-chip chip-cloud"
           style={{
@@ -233,14 +279,13 @@ export default function Hero() {
           <Database size={12} /> REST Integrations
         </motion.div>
 
-        {/* Premium Lottie Developer Workspace Illustration */}
         <div className="orbit-illustration" aria-hidden="true">
           <Lottie
             animationData={loaderAnimation}
             loop={!reducedMotion}
             style={{ width: '100%', height: '100%' }}
           />
-          <Sparkles size={16} className="text-[#fbbf24] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+          <Sparkles size={16} />
         </div>
       </motion.div>
 
