@@ -52,38 +52,93 @@ const projectFlows = {
   ]
 };
 
+import { ArrowLeft, ArrowRight } from 'lucide-react';
+
+const slideVariants = {
+  enter: (dir) => ({
+    x: dir > 0 ? 80 : -80,
+    opacity: 0,
+    scale: 0.99,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      x: { type: 'spring', stiffness: 350, damping: 32 },
+      opacity: { duration: 0.25 },
+      scale: { duration: 0.25 },
+    },
+  },
+  exit: (dir) => ({
+    x: dir < 0 ? 80 : -80,
+    opacity: 0,
+    scale: 0.99,
+    transition: {
+      x: { type: 'spring', stiffness: 350, damping: 32 },
+      opacity: { duration: 0.25 },
+      scale: { duration: 0.25 },
+    },
+  }),
+};
+
 export default function Projects() {
   const [filter, setFilter] = useState('All');
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
   const [expandedProject, setExpandedProject] = useState(null);
 
   const visibleProjects = filter === 'All'
     ? projects
     : projects.filter((project) => project.categories.includes(filter));
 
+  const handleFilterChange = (newFilter) => {
+    setFilter(newFilter);
+    setActiveIndex(0);
+    setDirection(0);
+    setExpandedProject(null);
+  };
+
+  const handlePrev = () => {
+    if (visibleProjects.length <= 1) return;
+    setDirection(-1);
+    setActiveIndex((prev) => (prev - 1 + visibleProjects.length) % visibleProjects.length);
+    setExpandedProject(null);
+  };
+
+  const handleNext = () => {
+    if (visibleProjects.length <= 1) return;
+    setDirection(1);
+    setActiveIndex((prev) => (prev + 1) % visibleProjects.length);
+    setExpandedProject(null);
+  };
+
   const toggleExpand = (projectId) => {
     setExpandedProject(expandedProject === projectId ? null : projectId);
   };
+
+  const activeProject = visibleProjects[activeIndex];
+  const isExpanded = activeProject ? expandedProject === activeProject.id : false;
+  const flowNodes = activeProject ? (projectFlows[activeProject.id] || []) : [];
 
   return (
     <section id="projects" className="section section-projects">
       <div className="section-shell">
         <Reveal>
           <SectionLabel
-            eyebrow="03 / Selected Case Studies"
+            eyebrow="Selected Case Studies"
             title="Systems with Real-World Stakes."
             description="Explore full-lifecycle software engineered for logistics tracking, donation pipeline automation, and secure corporate platforms."
           />
         </Reveal>
 
+        {/* Filter Bar */}
         <Reveal className="filter-bar" delay={0.06}>
           {projectFilters.map((item) => (
             <button
               type="button"
               key={item}
-              onClick={() => {
-                setFilter(item);
-                setExpandedProject(null); // Clear expansion on filter
-              }}
+              onClick={() => handleFilterChange(item)}
               className={filter === item ? 'active' : ''}
             >
               {item}
@@ -91,73 +146,76 @@ export default function Projects() {
           ))}
         </Reveal>
 
-        <motion.div layout className="projects-list">
-          <AnimatePresence mode="popLayout">
-            {visibleProjects.map((project, index) => {
-              const isExpanded = expandedProject === project.id;
-              const flowNodes = projectFlows[project.id] || [];
-
-              return (
+        {/* Horizontal Slide Presentation Frame */}
+        <div className="projects-carousel-container relative mt-10">
+          {activeProject ? (
+            <div className="carousel-slide-viewport overflow-hidden relative min-h-[480px]">
+              <AnimatePresence mode="wait" custom={direction}>
                 <motion.article
-                  layout
-                  key={project.id}
-                  initial={{ opacity: 0, scale: 0.96, y: 24 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.96, y: -12 }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.04 }}
-                  className={`project-case tone-${project.tone} glass-card`}
+                  custom={direction}
+                  key={activeProject.id}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className={`project-case tone-${activeProject.tone} glass-card w-full`}
+                  data-cursor-label="View"
                 >
                   <div className="project-main-layout">
                     {/* Visual mockup of browser */}
-                    <ProjectVisual type={project.visual} />
+                    <ProjectVisual type={activeProject.visual} />
 
                     {/* Copy details */}
-                    <div className="project-copy">
-                      <div className="project-number font-mono">{project.index}</div>
-                      <span className="project-eyebrow font-mono text-[10px] uppercase tracking-widest text-[var(--muted)]">{project.eyebrow}</span>
-                      <h3 className="text-lg font-bold text-[var(--text)] mt-1 mb-3">{project.title}</h3>
-                      <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">{project.description}</p>
-                      
-                      {/* Short Impact Banner */}
-                      <div className="project-impact font-mono text-xs text-[var(--green)] flex items-center gap-1.5 mb-4">
-                        <Check size={14} className="flex-shrink-0" />
-                        <span><strong>Impact:</strong> {project.impact}</span>
+                    <div className="project-copy flex flex-col justify-between">
+                      <div>
+                        <div className="project-number font-mono">{activeProject.index}</div>
+                        <span className="project-eyebrow font-mono text-[10px] uppercase tracking-widest text-[var(--muted)]">{activeProject.eyebrow}</span>
+                        <h3 className="text-lg font-bold text-[var(--text)] mt-1 mb-3">{activeProject.title}</h3>
+                        <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">{activeProject.description}</p>
+                        
+                        {/* Short Impact Banner */}
+                        <div className="project-impact font-mono text-xs text-[var(--green)] flex items-center gap-1.5 mb-4">
+                          <Check size={14} className="flex-shrink-0" />
+                          <span><strong>Impact:</strong> {activeProject.impact}</span>
+                        </div>
+
+                        {/* Technical specifications expansion button */}
+                        <button
+                          type="button"
+                          className="expand-details-btn flex items-center gap-1.5 font-mono text-xs text-[var(--blue)] hover:text-[var(--text)] transition-colors duration-200 mb-6"
+                          onClick={() => toggleExpand(activeProject.id)}
+                        >
+                          {isExpanded ? (
+                            <>
+                              <span>Hide Technical Architecture</span> <ChevronUp size={14} />
+                            </>
+                          ) : (
+                            <>
+                              <span>Expand Technical Architecture</span> <ChevronDown size={14} />
+                            </>
+                          )}
+                        </button>
                       </div>
 
-                      {/* Technical specifications expansion button */}
-                      <button
-                        type="button"
-                        className="expand-details-btn flex items-center gap-1.5 font-mono text-xs text-[var(--blue)] hover:text-[var(--text)] transition-colors duration-200 mb-6"
-                        onClick={() => toggleExpand(project.id)}
-                      >
-                        {isExpanded ? (
-                          <>
-                            <span>Hide Technical Architecture</span> <ChevronUp size={14} />
-                          </>
-                        ) : (
-                          <>
-                            <span>Expand Technical Architecture</span> <ChevronDown size={14} />
-                          </>
-                        )}
-                      </button>
+                      <div>
+                        {/* Stack details */}
+                        <div className="project-stack flex flex-wrap gap-2 mb-6">
+                          {activeProject.stack.map((item) => (
+                            <span key={item} className="px-2 py-0.5 border border-[var(--border)] rounded text-[10px] font-mono text-[var(--muted)]">
+                              {item}
+                            </span>
+                          ))}
+                        </div>
 
-                      {/* Stack details */}
-                      <div className="project-stack flex flex-wrap gap-2 mb-6">
-                        {project.stack.map((item) => (
-                          <span key={item} className="px-2 py-0.5 border border-[var(--border)] rounded text-[10px] font-mono text-[var(--muted)]">
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Core Actions */}
-                      <div className="project-actions flex gap-4 mt-auto border-t border-[var(--border)] pt-4">
-                        <a href={project.github} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs font-mono text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200">
-                          <Code2 size={14} /> GitHub Code <ArrowUpRight size={12} />
-                        </a>
-                        <a href={`mailto:${siteMeta.email}?subject=${encodeURIComponent(`Demo request: ${project.title}`)}`} className="flex items-center gap-1 text-xs font-mono text-[var(--blue)] hover:text-[var(--text)] transition-colors duration-200">
-                          Request Live Demo <ArrowUpRight size={12} />
-                        </a>
+                        {/* Core Actions */}
+                        <div className="project-actions flex gap-4 mt-auto border-t border-[var(--border)] pt-4">
+                          <a href={activeProject.github} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-xs font-mono text-[var(--muted)] hover:text-[var(--text)] transition-colors duration-200">
+                            <Code2 size={14} /> GitHub Code <ArrowUpRight size={12} />
+                          </a>
+                          <a href={`mailto:${siteMeta.email}?subject=${encodeURIComponent(`Demo request: ${activeProject.title}`)}`} className="flex items-center gap-1 text-xs font-mono text-[var(--blue)] hover:text-[var(--text)] transition-colors duration-200">
+                            Request Live Demo <ArrowUpRight size={12} />
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -177,11 +235,11 @@ export default function Projects() {
                           <div className="lg:col-span-7 flex flex-col gap-4 text-xs text-[var(--muted)] leading-relaxed select-text">
                             <div>
                               <strong className="text-[var(--text)] block text-xs uppercase font-mono tracking-wider mb-1">Business Problem:</strong>
-                              <p className="pl-3 border-l border-[var(--border-strong)]">{project.challenge}</p>
+                              <p className="pl-3 border-l border-[var(--border-strong)]">{activeProject.challenge}</p>
                             </div>
                             <div>
                               <strong className="text-[var(--text)] block text-xs uppercase font-mono tracking-wider mb-1">Implementation & Solution:</strong>
-                              <p className="pl-3 border-l border-[var(--border-strong)]">{project.solution}</p>
+                              <p className="pl-3 border-l border-[var(--border-strong)]">{activeProject.solution}</p>
                             </div>
                             <div>
                               <strong className="text-[var(--text)] block text-xs uppercase font-mono tracking-wider mb-1">Governor Limits & Technical Challenges:</strong>
@@ -229,16 +287,57 @@ export default function Projects() {
                     )}
                   </AnimatePresence>
                 </motion.article>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+              </AnimatePresence>
+            </div>
+          ) : (
+            <div className="empty-projects font-mono text-xs text-[var(--muted)] text-center py-12">
+              No public case study in this category yet. The capability is part of my broader stack.
+            </div>
+          )}
 
-        {visibleProjects.length === 0 && (
-          <div className="empty-projects font-mono text-xs text-[var(--muted)] text-center py-12">
-            No public case study in this category yet. The capability is part of my broader stack.
-          </div>
-        )}
+          {/* Carousel Controls */}
+          {visibleProjects.length > 1 && (
+            <div className="carousel-controls flex items-center justify-between mt-8 select-none">
+              <button
+                type="button"
+                className="carousel-nav-btn prev-btn flex items-center justify-center w-10 h-10 rounded-full border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-raised)] hover:border-[var(--blue)] text-[var(--muted)] hover:text-[var(--text)] transition-all duration-300"
+                onClick={handlePrev}
+                data-cursor-label="Back"
+              >
+                <ArrowLeft size={16} />
+              </button>
+
+              <div className="carousel-indicators flex gap-3">
+                {visibleProjects.map((proj, idx) => (
+                  <button
+                    key={proj.id}
+                    type="button"
+                    className={`indicator-node flex flex-col items-center gap-1 font-mono text-[9px] focus:outline-none ${
+                      activeIndex === idx ? 'is-active text-[var(--blue)] font-bold' : 'text-[var(--muted)]'
+                    }`}
+                    onClick={() => {
+                      setDirection(idx > activeIndex ? 1 : -1);
+                      setActiveIndex(idx);
+                      setExpandedProject(null);
+                    }}
+                  >
+                    <span>0{idx + 1}</span>
+                    <span className="indicator-line w-6 h-[2px] bg-[var(--border)] rounded-full transition-colors duration-300" style={{ backgroundColor: activeIndex === idx ? 'var(--blue)' : 'var(--border)' }} />
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className="carousel-nav-btn next-btn flex items-center justify-center w-10 h-10 rounded-full border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-raised)] hover:border-[var(--blue)] text-[var(--muted)] hover:text-[var(--text)] transition-all duration-300"
+                onClick={handleNext}
+                data-cursor-label="Next"
+              >
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

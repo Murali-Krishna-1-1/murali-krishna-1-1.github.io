@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { motion, useReducedMotion } from 'motion/react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import LottieComponent from 'lottie-react';
-import { ArrowDown, ArrowUpRight, CheckCircle2, Cloud, Code2, Database, Sparkles } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, CheckCircle2, Cloud, Code2, Database, Sparkles, Terminal } from 'lucide-react';
 import { siteMeta } from '../data/content';
 import { loaderAnimation } from '../data/loaderAnimation';
 import profilePhoto from '../../assets/photo.jpg';
@@ -41,7 +41,17 @@ export default function Hero() {
   const [typingSpeed, setTypingSpeed] = useState(100);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [runStatus, setRunStatus] = useState('idle');
+  const [tagIdx, setTagIdx] = useState(0);
   const reducedMotion = useReducedMotion();
+
+  // Cycle floating tags every 4 seconds
+  useEffect(() => {
+    if (reducedMotion) return;
+    const interval = setInterval(() => {
+      setTagIdx((prev) => (prev + 1) % 3);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [reducedMotion]);
 
   useEffect(() => {
     if (reducedMotion) {
@@ -112,13 +122,16 @@ export default function Hero() {
         animate="visible"
         className="hero-copy"
       >
-        <motion.div variants={itemVariants} className="status-badge">
-          <span className="status-dot green" />
-          <span>Environment: Production Synced (v61.0)</span>
-        </motion.div>
+        <motion.div variants={itemVariants} className="hero-badges-row">
+          <div className="modern-status-badge">
+            <span className="status-dot green animate-pulse" />
+            <span className="font-mono">ENV: PRODUCTION_SYNCED (v61.0)</span>
+          </div>
 
-        <motion.div variants={itemVariants} className="availability">
-          <i /> Available for select roles &amp; projects
+          <div className="modern-availability-badge">
+            <span className="availability-dot" />
+            <span>Available for select roles &amp; projects</span>
+          </div>
         </motion.div>
 
         <motion.p variants={itemVariants} className="hero-kicker">
@@ -176,7 +189,17 @@ export default function Hero() {
         transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
         className="hero-visual"
       >
-        <div className="profile-frame">
+        <motion.div
+          className="profile-frame"
+          animate={reducedMotion ? {} : {
+            y: [0, -6, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
           <img src={profilePhoto} alt="Murali Krishna" fetchPriority="high" />
           <div className="profile-overlay" />
           <div className="profile-caption">
@@ -189,9 +212,9 @@ export default function Hero() {
               <strong>SETI Institute</strong>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className={`code-panel${runStatus !== 'idle' ? ' is-active' : ''}`}>
+        <div className={`code-panel${runStatus !== 'idle' ? ' is-active' : ''}`} data-cursor-label="Run">
           <div className="window-bar">
             <div className="window-dots">
               <i /><i /><i />
@@ -204,51 +227,56 @@ export default function Hero() {
             >
               {runStatus === 'idle' && '▶ Run Apex'}
               {runStatus === 'compiling' && '⚡ Compiling...'}
-              {runStatus === 'running' && '⚙ Callout...'}
-              {runStatus === 'success' && '✓ Synced (18ms)'}
+              {runStatus === 'running' && '⚙ Executing...'}
+              {runStatus === 'success' && '✓ Success (18ms)'}
             </button>
-            <span>integration.apex</span>
+            <span>WelcomeEngineer.cls</span>
           </div>
-          <div className="code-lines" aria-hidden="true">
+          <div className="code-lines font-mono text-[10.5px] leading-relaxed text-[#a9b1d6]" aria-hidden="true">
             <span className={runStatus === 'compiling' ? 'is-highlight' : ''}>
-              <b>public class</b> DonorSync {'{'}
+              <b>public class</b> WelcomeEngineer {'{'}
             </span>
             <span className={`indent${runStatus === 'compiling' ? ' is-highlight' : ''}`}>
-              <em>@future</em>(callout=true)
-            </span>
-            <span className={`indent${runStatus === 'compiling' ? ' is-highlight' : ''}`}>
-              <b>static void</b> connect() {'{'}
+              <b>public static void</b> build() {'{'}
             </span>
             <span className={`indent-two${runStatus === 'running' ? ' is-active-line' : ''}`}>
-              CRM.unify(data);
+              System.debug(
+            </span>
+            <span className={`indent-three${runStatus === 'running' ? ' is-active-line' : ''}`}>
+              <em className="text-[var(--green)]">'Building enterprise software that solves real problems.'</em>
+            </span>
+            <span className={`indent-two${runStatus === 'running' ? ' is-active-line' : ''}`}>
+              );
             </span>
             <span className="indent">{'}'}</span>
             <span>{'}'}</span>
           </div>
-          <div className={`code-status code-status--${runStatus}`}>
+          <div className={`code-status code-status--${runStatus} font-mono text-[9px] border-t border-[rgba(255,255,255,0.05)] pt-2 mt-2`}>
             {runStatus === 'idle' && (
               <>
-                <i /> Production healthy
+                <i /> System ready
               </>
             )}
             {runStatus === 'compiling' && (
               <>
-                <i className="is-amber" /> Compiling metadata package...
+                <i className="is-amber" /> sf project deploy start...
               </>
             )}
             {runStatus === 'running' && (
               <>
-                <i className="is-blue" /> Executing asynchronous callout...
+                <i className="is-blue" /> System.debug executing...
               </>
             )}
             {runStatus === 'success' && (
-              <>
-                <i /> Transaction Unified (v61.0)
-              </>
+              <div className="flex flex-col gap-0.5 text-left text-[8.5px] text-[var(--green)] w-full overflow-hidden">
+                <span className="text-[var(--muted)]">[DEBUG LOG LIMITS EXCEEDED: FALSE]</span>
+                <span>USER_DEBUG|[5]|DEBUG|Building enterprise software that solves real problems.</span>
+              </div>
             )}
           </div>
         </div>
 
+        {/* Dynamic Rotating Technology tags */}
         <motion.div
           className="floating-chip chip-cloud"
           style={{
@@ -256,7 +284,18 @@ export default function Hero() {
             y: reducedMotion ? 0 : mousePos.y * 0.4,
           }}
         >
-          <Cloud size={12} /> Salesforce CRM
+          <Cloud size={12} />
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={tagIdx}
+              initial={{ opacity: 0, y: 3 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -3 }}
+              transition={{ duration: 0.25 }}
+            >
+              {['Salesforce Platform', 'Experience Cloud', 'CI/CD Pipeline'][tagIdx]}
+            </motion.span>
+          </AnimatePresence>
         </motion.div>
 
         <motion.div
@@ -266,7 +305,18 @@ export default function Hero() {
             y: reducedMotion ? 0 : mousePos.y * -0.5,
           }}
         >
-          <Code2 size={12} /> LWC + Apex
+          <Code2 size={12} />
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={tagIdx}
+              initial={{ opacity: 0, y: 3 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -3 }}
+              transition={{ duration: 0.25 }}
+            >
+              {['Lightning Web Components', 'Apex Services', 'Automation'][tagIdx]}
+            </motion.span>
+          </AnimatePresence>
         </motion.div>
 
         <motion.div
@@ -276,7 +326,18 @@ export default function Hero() {
             y: reducedMotion ? 0 : mousePos.y * -0.3,
           }}
         >
-          <Database size={12} /> REST Integrations
+          <Database size={12} />
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={tagIdx}
+              initial={{ opacity: 0, y: 3 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -3 }}
+              transition={{ duration: 0.25 }}
+            >
+              {['REST API Integrations', 'Enterprise Architecture', 'Automation'][tagIdx]}
+            </motion.span>
+          </AnimatePresence>
         </motion.div>
 
         <div className="orbit-illustration" aria-hidden="true">

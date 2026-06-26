@@ -7,7 +7,7 @@ const metricsList = [
     label: 'Years Experience',
     value: 3,
     suffix: '+',
-    status: 'ACTIVE',
+    status: 'EXPERIENCE',
     icon: Cpu,
     color: 'var(--blue)',
     desc: 'Production platforms engineered',
@@ -17,7 +17,7 @@ const metricsList = [
     label: 'Projects Delivered',
     value: 5,
     suffix: '',
-    status: 'DEPLOYED',
+    status: 'PROJECTS',
     icon: CheckCircle,
     color: 'var(--green)',
     desc: 'Enterprise solutions live',
@@ -27,7 +27,7 @@ const metricsList = [
     label: 'Salesforce Components',
     value: 120,
     suffix: '+',
-    status: 'OPTIMIZED',
+    status: 'COMPONENTS',
     icon: Layout,
     color: 'var(--amber)',
     desc: 'Custom LWCs & Declarative assets',
@@ -37,7 +37,7 @@ const metricsList = [
     label: 'Apex Classes',
     value: 45,
     suffix: '+',
-    status: '88%+ COV',
+    status: 'ARCHITECTURE',
     icon: Activity,
     color: 'var(--violet)',
     desc: 'Triggers, batches & mock test suits',
@@ -47,7 +47,7 @@ const metricsList = [
     label: 'Active Flows',
     value: 20,
     suffix: '+',
-    status: 'HEALTHY',
+    status: 'AUTOMATION',
     icon: ShieldAlert,
     color: 'var(--rose)',
     desc: 'Process automation pipelines',
@@ -57,7 +57,7 @@ const metricsList = [
     label: 'Experience Cloud Sites',
     value: 3,
     suffix: '',
-    status: 'ONLINE',
+    status: 'SOLUTIONS',
     icon: Network,
     color: 'var(--cyan)',
     desc: 'Secure digital workspaces live',
@@ -67,7 +67,7 @@ const metricsList = [
     label: 'REST Integrations',
     value: 6,
     suffix: '+',
-    status: 'SYNCED',
+    status: 'INTEGRATIONS',
     icon: GitBranch,
     color: 'var(--emerald)',
     desc: 'Secure API webhook endpoints',
@@ -116,9 +116,9 @@ export default function DashboardMetrics() {
         <div className="metrics-header flex justify-between items-center mb-6">
           <div className="flex items-center gap-2">
             <span className="terminal-dot green animate-pulse" />
-            <span className="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">SYSTEM STATUS: ALL CORE METRICS DEPLOYED</span>
+            <span className="font-mono text-xs uppercase tracking-wider text-[var(--muted)]">SYSTEM MONITOR: CORE PROFESSIONAL METRICS</span>
           </div>
-          <span className="font-mono text-[10px] text-[var(--muted)] bg-[var(--border)] px-2 py-0.5 rounded">ENV: PRODUCTION_MONITOR</span>
+          <span className="font-mono text-[10px] text-[var(--muted)] bg-[var(--border)] px-2 py-0.5 rounded">CONSOLE: ENGINEERING_METRICS</span>
         </div>
 
         <div className="metrics-monitor-grid">

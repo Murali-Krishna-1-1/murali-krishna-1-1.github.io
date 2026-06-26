@@ -28,23 +28,7 @@ export default function App() {
   const [diagnosticsOpen, setDiagnosticsOpen] = useState(false);
   const [logoClicks, setLogoClicks] = useState(0);
 
-  // Recruiter Mode State
-  const [recruiterMode, setRecruiterMode] = useState(() => {
-    const saved = localStorage.getItem('recruiterMode');
-    return saved === 'true';
-  });
-
   useSmoothScroll();
-
-  // Handle Recruiter Mode effects
-  useEffect(() => {
-    localStorage.setItem('recruiterMode', recruiterMode);
-    if (recruiterMode) {
-      document.documentElement.classList.add('recruiter-mode');
-    } else {
-      document.documentElement.classList.remove('recruiter-mode');
-    }
-  }, [recruiterMode]);
 
   // Loading Screen Timer - set to exactly 2.5s for realistic log sequences
   useEffect(() => {
@@ -109,8 +93,6 @@ export default function App() {
       <Nav
         theme={theme}
         onToggleTheme={toggleTheme}
-        recruiterMode={recruiterMode}
-        onToggleRecruiterMode={() => setRecruiterMode((prev) => !prev)}
         onLogoClick={handleLogoClick}
       />
       

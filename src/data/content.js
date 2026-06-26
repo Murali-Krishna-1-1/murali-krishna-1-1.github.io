@@ -1,7 +1,7 @@
 export const siteMeta = {
   name: 'Murali Krishna',
   initials: 'MK',
-  title: 'Salesforce Developer & Full Stack Engineer',
+  title: 'Software Engineer & Full Stack Engineer',
   location: 'Chennai, India',
   email: 'muralikrishna1624@icloud.com',
   github: 'https://github.com/Murali-Krishna-1-1',
@@ -195,7 +195,7 @@ export const experience = [
   },
   {
     date: '2023 - 2025',
-    role: 'Salesforce Developer',
+    role: 'Software Engineer',
     company: 'Lean AgileNautics',
     location: 'India',
     summary: 'Built customer-facing Salesforce products, specializing in IoT device ingestion, real-time mapping, and responsive web components.',
@@ -208,7 +208,7 @@ export const experience = [
   },
   {
     date: '2023',
-    role: 'Salesforce Developer Intern',
+    role: 'Software Engineer Intern',
     company: 'Lean AgileNautics',
     location: 'India',
     summary: 'Acquired platform fundamentals, deploying code and automations to sandbox and production environments.',
@@ -219,7 +219,7 @@ export const experience = [
   },
   {
     date: '2022',
-    role: 'Salesforce Developer Intern',
+    role: 'Software Engineer Intern',
     company: 'SmartInternz',
     location: 'Remote',
     summary: 'Completed intensive hands-on Salesforce development training and delivered foundational CRM configurations.',

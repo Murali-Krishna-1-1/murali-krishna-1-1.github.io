@@ -88,7 +88,7 @@ export default function TechNetwork() {
       <div className="section-shell">
         <Reveal>
           <SectionLabel
-            eyebrow="03 / Enterprise Architecture"
+            eyebrow="Enterprise Architecture"
             title="Salesforce Transactions, Visualised."
             description="Explore how data flows through a production Salesforce environment, from client interaction down to backend database systems."
           />
@@ -96,7 +96,7 @@ export default function TechNetwork() {
 
         <div className="architecture-grid mt-10">
           {/* Left Side: The Interactive SVG Stack */}
-          <div className="architecture-diagram-panel glass-card relative flex items-center justify-center py-10 px-6">
+          <div className="architecture-diagram-panel glass-card relative flex items-center justify-center p-8 lg:p-10" data-cursor-label="Explore">
             {/* The Blueprint Grid Background inside this panel */}
             <div className="absolute inset-0 blueprint-grid opacity-[0.03] pointer-events-none" />
 
@@ -183,7 +183,7 @@ export default function TechNetwork() {
 
           {/* Right Side: The Detail Console Card explaining the layer responsibility */}
           <div className="architecture-detail-panel flex flex-col justify-between">
-            <div className="glass-card flex-1 p-6 relative flex flex-col justify-between overflow-hidden">
+            <div className="glass-card flex-1 p-8 lg:p-10 relative flex flex-col justify-between overflow-hidden">
               {/* Dynamic Accent Glow */}
               <div
                 className="absolute top-0 right-0 w-32 h-32 rounded-full filter blur-[40px] opacity-10 transition-all duration-500"
@@ -246,9 +246,9 @@ export default function TechNetwork() {
             </div>
 
             {/* Explanatory Help Box */}
-            <div className="glass-card p-4 mt-4 flex items-center gap-3 border-l-4 border-l-[var(--blue)]">
-              <span className="font-mono text-[10px] text-[var(--muted)]">
-                <strong>Recruiter Tip:</strong> Hover over any architecture layer in the stack to trace the transaction route and see Murali&apos;s exact technical implementation details.
+            <div className="glass-card p-5 mt-4 flex items-center gap-3 border-l-4 border-l-[var(--blue)]">
+              <span className="font-mono text-[10px] text-[var(--muted)] leading-relaxed">
+                Hover over any layer to explore how each part contributes to the complete enterprise architecture.
               </span>
             </div>
           </div>

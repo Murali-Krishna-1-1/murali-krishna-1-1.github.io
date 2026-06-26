@@ -168,6 +168,16 @@ const steps = [
 
 export default function SolutionWalkthrough() {
   const [activeStep, setActiveStep] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  // Automatic Step Progression (5s timer)
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % steps.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
 
   const activeData = steps[activeStep];
   const StepIcon = activeData.icon;
@@ -177,13 +187,26 @@ export default function SolutionWalkthrough() {
       <div className="section-shell">
         <Reveal>
           <SectionLabel
-            eyebrow="04 / Featured Case Study Explorer"
+            eyebrow="Featured Case Study Explorer"
             title="Deconstructing a Production System."
             description="Recruiters can step through the complete lifecycle of one high-concurrency Salesforce integration, showing how it was researched, designed, built, and deployed."
           />
         </Reveal>
 
         <div className="solution-explorer-box glass-card mt-10 p-6 md:p-8 overflow-hidden relative">
+          {/* Ingestion Stream Progress Bar for Cinematic Auto-Play */}
+          {isAutoPlaying && (
+            <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-[rgba(255,255,255,0.03)] z-20 overflow-hidden">
+              <motion.div
+                key={activeStep}
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: 5, ease: 'linear' }}
+                className="h-full bg-[var(--blue)] origin-left"
+              />
+            </div>
+          )}
+
           {/* Timeline Node Stepper */}
           <div className="explorer-stepper flex justify-between items-center mb-8 relative z-10 w-full overflow-x-auto pb-4 gap-2">
             <div className="stepper-track-line absolute left-0 right-0 h-[1.5px] bg-[var(--border)] top-1/2 -translate-y-1/2 z-0" />
@@ -195,8 +218,12 @@ export default function SolutionWalkthrough() {
                 <button
                   key={step.title}
                   type="button"
-                  onClick={() => setActiveStep(idx)}
-                  className={`stepper-node flex flex-col items-center relative z-10 gap-2 focus:outline-none flex-1 min-w-[70px]`}
+                  onClick={() => {
+                    setActiveStep(idx);
+                    setIsAutoPlaying(false);
+                  }}
+                  className="stepper-node flex flex-col items-center relative z-10 gap-2 focus:outline-none flex-1 min-w-[70px]"
+                  data-cursor-label="Explore"
                 >
                   <div
                     className={`w-8 h-8 rounded-full flex items-center justify-center font-mono text-xs border transition-all duration-350`}
@@ -251,7 +278,10 @@ export default function SolutionWalkthrough() {
                   {activeStep < steps.length - 1 ? (
                     <button
                       type="button"
-                      onClick={() => setActiveStep((s) => s + 1)}
+                      onClick={() => {
+                        setActiveStep((s) => s + 1);
+                        setIsAutoPlaying(false);
+                      }}
                       className="button button-primary flex items-center gap-2 text-xs py-2 px-4 w-full justify-center"
                       style={{ '--accent-color': activeData.color }}
                     >
@@ -260,7 +290,10 @@ export default function SolutionWalkthrough() {
                   ) : (
                     <button
                       type="button"
-                      onClick={() => setActiveStep(0)}
+                      onClick={() => {
+                        setActiveStep(0);
+                        setIsAutoPlaying(false);
+                      }}
                       className="button button-secondary text-xs py-2 px-4 w-full justify-center"
                     >
                       Reset Walkthrough

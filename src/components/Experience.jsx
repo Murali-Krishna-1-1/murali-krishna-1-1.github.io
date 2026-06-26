@@ -38,7 +38,7 @@ export default function Experience() {
       <div className="section-shell">
         <Reveal>
           <SectionLabel
-            eyebrow="05 / Professional Timeline"
+            eyebrow="Professional Timeline"
             title="A Record of Shipping."
             description="Combining chronological career growth with Salesforce deployment lifecycle milestones, engineered for enterprise reliability."
           />
@@ -57,13 +57,11 @@ export default function Experience() {
             const StageIcon = stageInfo.icon;
             
             return (
-              <Reveal
+              <div
                 key={`${job.company}-${job.date}`}
-                direction={index % 2 === 0 ? 'right' : 'left'}
-                delay={index * 0.05}
                 className={`timeline-item ${index % 2 === 0 ? 'is-left' : 'is-right'}`}
               >
-                {/* Timeline status indicator node */}
+                {/* Timeline status indicator node - static and centers perfectly */}
                 <motion.span
                   className="timeline-dot"
                   initial={{ scale: 0 }}
@@ -73,43 +71,50 @@ export default function Experience() {
                   style={{ borderColor: stageInfo.color }}
                 />
                 
-                {/* Monitoring-dashboard card */}
-                <article className="glass-card experience-monitor-card relative overflow-hidden">
-                  {/* Subtle Top Status Bar */}
-                  <div className="flex justify-between items-center border-b border-[var(--border)] pb-3 mb-4 font-mono text-[10px]">
-                    <div className="flex items-center gap-1.5">
-                      <StageIcon size={12} style={{ color: stageInfo.color }} />
-                      <span className="font-semibold text-[var(--text)] uppercase tracking-wider">{stageInfo.stage}</span>
-                    </div>
-                    <span className="font-mono text-[9px] px-1.5 py-0.5 border rounded" style={{ color: stageInfo.color, borderColor: `${stageInfo.color}33`, background: `${stageInfo.color}06` }}>
-                      ● {stageInfo.status}
-                    </span>
-                  </div>
-
-                  <div className="job-meta flex justify-between items-start mb-2">
-                    <span className="font-mono text-xs text-[var(--blue)] font-bold">{job.date}</span>
-                    {job.current && <span className="current-role"><i />Current</span>}
-                  </div>
-                  
-                  <h3 className="text-base font-bold text-[var(--text)] m-0 leading-tight">{job.role}</h3>
-                  
-                  <div className="job-company flex items-center gap-1.5 text-xs text-[var(--muted)] my-2">
-                    <strong>{job.company}</strong>
-                    <span>/ {job.location}</span>
-                  </div>
-
-                  <p className="text-xs text-[var(--muted)] leading-relaxed mb-4">{job.summary}</p>
-                  
-                  <div className="job-points flex flex-col gap-2 border-t border-[var(--border)] pt-3 mt-3">
-                    {job.points.map((point) => (
-                      <span key={point} className="flex items-start gap-2 text-[11px] text-[var(--muted)] leading-relaxed">
-                        <CheckCircle2 size={13} className="text-[var(--blue)] mt-0.5 flex-shrink-0" />
-                        <span>{point}</span>
+                {/* Reveal card only - keeps timeline static during slide */}
+                <Reveal
+                  direction={index % 2 === 0 ? 'right' : 'left'}
+                  delay={index * 0.05}
+                  className="timeline-reveal-container"
+                >
+                  {/* Monitoring-dashboard card */}
+                  <article className="glass-card experience-monitor-card relative overflow-hidden" data-cursor-label="View">
+                    {/* Subtle Top Status Bar */}
+                    <div className="flex justify-between items-center border-b border-[var(--border)] pb-3 mb-4 font-mono text-[10px]">
+                      <div className="flex items-center gap-1.5">
+                        <StageIcon size={12} style={{ color: stageInfo.color }} />
+                        <span className="font-semibold text-[var(--text)] uppercase tracking-wider">{stageInfo.stage}</span>
+                      </div>
+                      <span className="font-mono text-[9px] px-1.5 py-0.5 border rounded" style={{ color: stageInfo.color, borderColor: `${stageInfo.color}33`, background: `${stageInfo.color}06` }}>
+                        ● {stageInfo.status}
                       </span>
-                    ))}
-                  </div>
-                </article>
-              </Reveal>
+                    </div>
+
+                    <div className="job-meta flex justify-between items-start mb-2">
+                      <span className="font-mono text-xs text-[var(--blue)] font-bold">{job.date}</span>
+                      {job.current && <span className="current-role"><i />Current</span>}
+                    </div>
+                    
+                    <h3 className="text-base font-bold text-[var(--text)] m-0 leading-tight">{job.role}</h3>
+                    
+                    <div className="job-company flex items-center gap-1.5 text-xs text-[var(--muted)] my-2">
+                      <strong>{job.company}</strong>
+                      <span>/ {job.location}</span>
+                    </div>
+
+                    <p className="text-xs text-[var(--muted)] leading-relaxed mb-4">{job.summary}</p>
+                    
+                    <div className="job-points flex flex-col gap-2 border-t border-[var(--border)] pt-3 mt-3">
+                      {job.points.map((point) => (
+                        <span key={point} className="flex items-start gap-2 text-[11px] text-[var(--muted)] leading-relaxed">
+                          <CheckCircle2 size={13} className="text-[var(--blue)] mt-0.5 flex-shrink-0" />
+                          <span>{point}</span>
+                        </span>
+                      ))}
+                    </div>
+                  </article>
+                </Reveal>
+              </div>
             );
           })}
         </div>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { ArrowUpRight, Briefcase, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import { navLinks, siteMeta } from '../data/content';
 import ThemeToggle from './ThemeToggle';
 
-export default function Nav({ theme, onToggleTheme, recruiterMode, onToggleRecruiterMode, onLogoClick }) {
+export default function Nav({ theme, onToggleTheme, onLogoClick }) {
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('hero');
   const [open, setOpen] = useState(false);
@@ -77,17 +77,6 @@ export default function Nav({ theme, onToggleTheme, recruiterMode, onToggleRecru
       </nav>
 
       <div className="nav-actions">
-        {/* Recruiter Mode Toggle */}
-        <button
-          type="button"
-          className={`recruiter-toggle-btn ${recruiterMode ? 'is-active' : ''}`}
-          onClick={onToggleRecruiterMode}
-          aria-label="Toggle Recruiter Mode"
-        >
-          <Briefcase size={13} />
-          <span>{recruiterMode ? 'Recruiter Active' : 'Recruiter Mode'}</span>
-        </button>
-
         <ThemeToggle theme={theme} onToggle={onToggleTheme} />
         <a className="nav-cta" href={`mailto:${siteMeta.email}`}>
           Let&apos;s talk <ArrowUpRight size={15} />
@@ -114,21 +103,6 @@ export default function Nav({ theme, onToggleTheme, recruiterMode, onToggleRecru
             className="mobile-nav"
             aria-label="Mobile navigation"
           >
-            {/* Recruiter Toggle inside Mobile Menu */}
-            <div className="px-4 py-2 border-b border-[var(--border)] mb-2">
-              <button
-                type="button"
-                className={`recruiter-toggle-btn w-full justify-center ${recruiterMode ? 'is-active' : ''}`}
-                onClick={() => {
-                  onToggleRecruiterMode();
-                  setOpen(false);
-                }}
-              >
-                <Briefcase size={14} />
-                <span>{recruiterMode ? 'Recruiter Mode: Enabled' : 'Enable Recruiter Mode'}</span>
-              </button>
-            </div>
-
             {navLinks.map((link, index) => (
               <motion.a
                 key={link.href}
