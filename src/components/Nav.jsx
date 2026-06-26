@@ -87,7 +87,6 @@ export default function Nav({ theme, onToggleTheme, onLogoClick }) {
           onClick={() => setOpen((value) => !value)}
           aria-label={open ? 'Close navigation' : 'Open navigation'}
           aria-expanded={open}
-          style={{ display: 'none' }} /* Managed by media queries in CSS */
         >
           {open ? <X size={19} /> : <Menu size={19} />}
         </button>

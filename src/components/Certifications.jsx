@@ -55,14 +55,9 @@ export default function Certifications() {
                 <div className="cert-top">
                   <span className="cert-code">{cert.code}</span>
                   {cert.inProgress ? (
-                    <Clock3 size={20} className="text-[var(--muted)]" />
+                    <Clock3 size={20} className="text-[var(--muted)] cert-icon-spin" />
                   ) : (
-                    <lord-icon
-                      src="https://cdn.lordicon.com/gsqxdxog.json"
-                      trigger="loop"
-                      colors="primary:var(--blue),secondary:var(--violet)"
-                      style={{ width: '24px', height: '24px' }}
-                    />
+                    <BadgeCheck size={22} className="text-[var(--blue)] cert-icon-check" />
                   )}
                 </div>
                 <span className="cert-issuer">{cert.issuer} / {cert.date}</span>

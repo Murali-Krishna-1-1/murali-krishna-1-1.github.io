@@ -51,15 +51,14 @@ export default function About() {
           <div className="principles-grid">
             <Reveal delay={0.06} direction="right">
               <div className="principle-card">
-                <div className="mb-4 flex h-[40px] items-center text-[var(--blue)]">
-                  {/* Production Minded: Server Rack with Pulsing Core and Rotating Rings */}
-                  <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <div className="principle-icon principle-icon--blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="3" width="20" height="8" rx="2" />
                     <rect x="2" y="13" width="20" height="8" rx="2" />
-                    <line x1="6" y1="7" x2="6.01" y2="7" strokeWidth="3" className="stroke-[var(--green)] animate-pulse" />
-                    <line x1="6" y1="17" x2="6.01" y2="17" strokeWidth="3" className="stroke-[var(--green)] animate-pulse" />
-                    <circle cx="17" cy="7" r="2.5" className="animate-spin origin-center" style={{ animationDuration: '6s', strokeDasharray: '3 2' }} />
-                    <circle cx="17" cy="17" r="2.5" className="animate-spin origin-center" style={{ animationDuration: '4s', strokeDasharray: '2 2' }} />
+                    <circle cx="6" cy="7" r="1" className="status-dot-fill" />
+                    <circle cx="6" cy="17" r="1" className="status-dot-fill" />
+                    <circle cx="17" cy="7" r="2.5" className="orbit-ring-spin" />
+                    <circle cx="17" cy="17" r="2.5" className="orbit-ring-spin-reverse" />
                   </svg>
                 </div>
                 <strong>Production Minded</strong>
@@ -69,15 +68,13 @@ export default function About() {
 
             <Reveal delay={0.12} direction="right">
               <div className="principle-card">
-                <div className="mb-4 flex h-[40px] items-center text-[var(--green)]">
-                  {/* User Centered: Browser Frame with Mouse Path and Pulsing Silhouette */}
-                  <svg className="w-10 h-10 animate-bounce-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <div className="principle-icon principle-icon--green animate-bounce-slow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <rect x="2" y="3" width="20" height="18" rx="2" />
                     <line x1="2" y1="8" x2="22" y2="8" />
-                    <path d="M7 15a3 3 0 1 1 6 0 3 3 0 0 1-6 0Z" className="animate-pulse" />
+                    <path d="M7 15a3 3 0 1 1 6 0 3 3 0 0 1-6 0Z" />
                     <path d="M12 18h-4" />
-                    {/* Tiny Cursor path simulation in CSS */}
-                    <polygon points="14,14 19,16 16.5,17 19,21 17.5,21.5 15,17.5 13,19" className="fill-[var(--green)] stroke-none animate-pulse" />
+                    <polygon points="14,14 19,16 16.5,17 19,21 17.5,21.5 15,17.5 13,19" className="principle-icon-fill" />
                   </svg>
                 </div>
                 <strong>User Centered</strong>
@@ -87,12 +84,11 @@ export default function About() {
 
             <Reveal delay={0.18} direction="right">
               <div className="principle-card">
-                <div className="mb-4 flex h-[40px] items-center text-[var(--violet)]">
-                  {/* Integration Fluent: Resilient flowing webhook data stream */}
-                  <svg className="w-10 h-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="4" cy="12" r="3" className="fill-[var(--blue-glow)]" />
-                    <circle cx="20" cy="12" r="3" className="fill-[var(--violet-glow)]" />
-                    <path d="M7 12h10" strokeDasharray="4 4" className="flowing-dashed-line stroke-[var(--blue)]" />
+                <div className="principle-icon principle-icon--violet">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="4" cy="12" r="3" className="principle-icon-glow" />
+                    <circle cx="20" cy="12" r="3" className="principle-icon-glow" />
+                    <path d="M7 12h10" strokeDasharray="4 4" className="flowing-dashed-line" />
                     <path d="m14 9 3 3-3 3" />
                   </svg>
                 </div>
@@ -103,12 +99,11 @@ export default function About() {
 
             <Reveal delay={0.24} direction="right">
               <div className="principle-card">
-                <div className="mb-4 flex h-[40px] items-center text-[var(--amber)]">
-                  {/* Platform Aware: Floating cloud with a central protective shield */}
-                  <svg className="w-10 h-10 animate-float-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <div className="principle-icon principle-icon--amber animate-float-slow">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 2a10 10 0 0 0-8 6.5A4 4 0 0 0 4 16h13a5 5 0 0 0 2.5-9.3A10 10 0 0 0 12 2Z" />
-                    <path d="M12 9v5" className="stroke-[var(--amber)]" />
-                    <path d="M10 12h4" className="stroke-[var(--amber)]" />
+                    <path d="M12 9v5" />
+                    <path d="M10 12h4" />
                   </svg>
                 </div>
                 <strong>Platform Aware</strong>

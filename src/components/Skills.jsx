@@ -71,42 +71,29 @@ export default function Skills() {
                 }}
               >
                 {/* Rotating Technology Orbit / Concentric Ring Visualization */}
-                <div className="skill-orbit-container relative flex items-center justify-center w-14 h-14 mb-5 select-none">
-                  {/* Inner Dashed Ring */}
+                <div className="skill-orbit-container">
                   <div
-                    className="absolute inset-0 rounded-full border border-dashed animate-spin opacity-30"
-                    style={{
-                      borderColor: accentVar,
-                      animationDuration: '12s',
-                    }}
+                    className="skill-orbit-ring"
+                    style={{ borderColor: accentVar }}
                   />
-                  {/* Outer Solid Ring with Orbiting Node */}
                   <div
-                    className="absolute inset-[-4px] rounded-full border animate-spin"
-                    style={{
-                      borderColor: glowVar,
-                      animationDuration: '18s',
-                      animationDirection: 'reverse',
-                    }}
+                    className="skill-orbit-ring-outer"
+                    style={{ borderColor: glowVar }}
                   >
                     <span
-                      className="absolute top-0 left-1/2 w-2 h-2 rounded-full -translate-x-1/2 -translate-y-1/2 animate-pulse"
+                      className="skill-orbit-node"
                       style={{
                         backgroundColor: accentVar,
                         boxShadow: `0 0 8px ${accentVar}`,
                       }}
                     />
                   </div>
-                  {/* Glowing Core Background */}
                   <div
-                    className="absolute w-8 h-8 rounded-full blur-[8px] opacity-20"
-                    style={{
-                      backgroundColor: accentVar,
-                    }}
+                    className="skill-orbit-glow"
+                    style={{ backgroundColor: accentVar }}
                   />
-                  {/* Icon Core */}
                   <div
-                    className="relative z-10 flex items-center justify-center w-10 h-10 rounded-lg border bg-[var(--card-bg)]"
+                    className="skill-orbit-core"
                     style={{
                       color: accentVar,
                       borderColor: `${accentVar}22`,
@@ -116,17 +103,12 @@ export default function Skills() {
                   </div>
                 </div>
 
-                <span className="skill-category font-mono text-[9px] uppercase tracking-widest text-[var(--muted)]">{skill.category}</span>
-                <h3 className="text-base font-bold text-[var(--text)] mt-1 mb-2">{skill.title}</h3>
-                <p className="text-xs text-[var(--muted)] leading-relaxed mb-4">{skill.description}</p>
-                <div className="skill-tags flex flex-wrap gap-1.5 mt-auto">
+                <span className="skill-category">{skill.category}</span>
+                <h3>{skill.title}</h3>
+                <p>{skill.description}</p>
+                <div className="skill-tags">
                   {skill.list.map((item) => (
-                    <span
-                      key={item}
-                      className="px-2 py-0.5 border border-[var(--border)] rounded text-[10px] font-mono text-[var(--muted)] hover:text-[var(--text)] hover:border-[var(--muted)] transition-colors duration-200"
-                    >
-                      {item}
-                    </span>
+                    <span key={item}>{item}</span>
                   ))}
                 </div>
               </motion.article>

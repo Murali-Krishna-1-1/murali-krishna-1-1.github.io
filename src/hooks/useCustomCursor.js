@@ -10,6 +10,11 @@ export function useCustomCursor() {
     const container = cursorRef.current;
     if (!container) return;
 
+    const isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    if (!isTouch) {
+      document.documentElement.classList.add('has-custom-cursor');
+    }
+
     const labelEl = container.querySelector('.custom-cursor-label');
 
     // Track mouse position
@@ -84,6 +89,7 @@ export function useCustomCursor() {
     document.addEventListener('mouseout', handleOut);
 
     return () => {
+      document.documentElement.classList.remove('has-custom-cursor');
       window.removeEventListener('mousemove', handleMove);
       document.removeEventListener('mouseover', handleOver);
       document.removeEventListener('mouseout', handleOut);

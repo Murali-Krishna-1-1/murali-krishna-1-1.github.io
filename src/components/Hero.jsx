@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
 import LottieComponent from 'lottie-react';
-import { ArrowDown, ArrowUpRight, CheckCircle2, Cloud, Code2, Database, Sparkles, Terminal } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, CheckCircle2, Cloud, Code2, Database, Sparkles } from 'lucide-react';
 import { siteMeta } from '../data/content';
 import { loaderAnimation } from '../data/loaderAnimation';
 import profilePhoto from '../../assets/photo.jpg';
@@ -124,7 +124,7 @@ export default function Hero() {
       >
         <motion.div variants={itemVariants} className="hero-badges-row">
           <div className="modern-status-badge">
-            <span className="status-dot green animate-pulse" />
+            <span className="status-dot green" />
             <span className="font-mono">ENV: PRODUCTION_SYNCED (v61.0)</span>
           </div>
 
@@ -232,7 +232,7 @@ export default function Hero() {
             </button>
             <span>WelcomeEngineer.cls</span>
           </div>
-          <div className="code-lines font-mono text-[10.5px] leading-relaxed text-[#a9b1d6]" aria-hidden="true">
+          <div className="code-lines" aria-hidden="true">
             <span className={runStatus === 'compiling' ? 'is-highlight' : ''}>
               <b>public class</b> WelcomeEngineer {'{'}
             </span>
@@ -243,7 +243,7 @@ export default function Hero() {
               System.debug(
             </span>
             <span className={`indent-three${runStatus === 'running' ? ' is-active-line' : ''}`}>
-              <em className="text-[var(--green)]">'Building enterprise software that solves real problems.'</em>
+              <em className="code-string">'Building enterprise software that solves real problems.'</em>
             </span>
             <span className={`indent-two${runStatus === 'running' ? ' is-active-line' : ''}`}>
               );
@@ -251,7 +251,7 @@ export default function Hero() {
             <span className="indent">{'}'}</span>
             <span>{'}'}</span>
           </div>
-          <div className={`code-status code-status--${runStatus} font-mono text-[9px] border-t border-[rgba(255,255,255,0.05)] pt-2 mt-2`}>
+          <div className={`code-status code-status--${runStatus}`}>
             {runStatus === 'idle' && (
               <>
                 <i /> System ready
@@ -268,8 +268,8 @@ export default function Hero() {
               </>
             )}
             {runStatus === 'success' && (
-              <div className="flex flex-col gap-0.5 text-left text-[8.5px] text-[var(--green)] w-full overflow-hidden">
-                <span className="text-[var(--muted)]">[DEBUG LOG LIMITS EXCEEDED: FALSE]</span>
+              <div className="code-status-success-log">
+                <span className="log-muted">[DEBUG LOG LIMITS EXCEEDED: FALSE]</span>
                 <span>USER_DEBUG|[5]|DEBUG|Building enterprise software that solves real problems.</span>
               </div>
             )}
@@ -346,7 +346,7 @@ export default function Hero() {
             loop={!reducedMotion}
             style={{ width: '100%', height: '100%' }}
           />
-          <Sparkles size={16} />
+          <Sparkles size={16} className="orbit-sparkle" />
         </div>
       </motion.div>
 

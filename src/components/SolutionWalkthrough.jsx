@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { AlertCircle, FileCode, CheckCircle, HelpCircle, Network, ArrowRight } from 'lucide-react';
 import Reveal from './Reveal';
